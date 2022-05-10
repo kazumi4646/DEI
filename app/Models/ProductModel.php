@@ -14,7 +14,7 @@ class ProductModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['product_name', 'product_price', 'product_description', 'product_image', 'product_status', 'product_category', 'product_by'];
+    protected $allowedFields    = ['name', 'price', 'description', 'image', 'status', 'request', 'reason', 'shop', 'seller_id'];
 
     // Dates
     protected $useTimestamps = false;
@@ -40,39 +40,30 @@ class ProductModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getProduct($id = false)
+    // punya order
+    // public function countUnfinishedOrder()
+    // {
+    //     $builder = $this->db->table('products');
+    //     $builder->where()
+    // }
+
+    public function getShopProduct()
     {
-        if ($id === false) {
-            return $this->findAll();
-        } else {
-            return $this->getWhere(['product_id' => $id]);
-        }
+        $builder = $this->db->table('products'); 
+        $builder->select('products.*, users.username');
+        $builder->join('users', 'users.id = products.seller_id');
+        $builder->where('products.request', 'Approved');
+
+        return $builder->get();   
     }
 
-    public function getActiveProduct()
+    public function getProductRequest()
     {
-        return $this->getWhere(['product_status' => 'Active']);
-    }
+        $builder = $this->db->table('products');
+        $builder->select('products.*, users.username');
+        $builder->join('users', 'users.id = products.seller_id');
+        $builder->where('products.request', 'Requested');
 
-    public function getBidProduct()
-    {
-        return $this->getWhere(['product_category' => 'Pre Order']);
-    }
-
-    public function insertProduct($data)
-    {
-        return $this->db->table($this->table)->insert($data);
-    }
-
-    public function updateProduct($data, $id)
-    {
-        return $this->db->table($this->table)->update($data, ['product_id' => $id]);
-    }
-
-    public function deleteProduct($id)
-    {
-        return $this->db->table($this->table)->delete(['product_id' => $id]);
+        return $builder->get();
     }
 }
-
-

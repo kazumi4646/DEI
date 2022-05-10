@@ -6,8 +6,12 @@ use App\Controllers\BaseController;
 
 class Blog extends BaseController
 {
-    public function index()
-    {
-        return view('blog/index');
-    }
+	public function index()
+	{
+		$page = [
+			'title' => 'Blog | Desa Ekspor Indonesia',
+		];
+
+		return view('blog/index', ['page' => $page]);
+	}
 }

@@ -35,7 +35,7 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['auth'];
 
     /**
      * Constructor.
@@ -48,5 +48,14 @@ class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+        $this->provinceModel = new \App\Models\ProvinceModel();
+        $this->regencyModel = new \App\Models\RegencyModel();
+        $this->districtModel = new \App\Models\DistrictModel();
+        $this->villageModel = new \App\Models\VillageModel();
+        $this->userModel = new \Myth\Auth\Models\UserModel();
+        $this->mitraModel = new \App\Models\MitraModel();
+        $this->productModel = new \App\Models\ProductModel();
+        $this->cartModel = new \App\Models\CartModel();
+        $this->orderModel = new \App\Models\OrderModel();
     }
 }
