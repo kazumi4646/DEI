@@ -25,4 +25,8 @@ class Home extends BaseController
     {
     	return view('about/history');
     }
+    public function visionmission()
+    {
+    	return view('about/visionmission');
+    }
 }

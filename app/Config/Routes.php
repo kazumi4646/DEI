@@ -43,6 +43,7 @@ $routes->get('/information', 'Home::information');
 $routes->get('/pressrelease', 'Home::pressrelease');
 $routes->get('/history', 'Home::history');
 $routes->get('/activity', 'Home::activity');
+$routes->get('/visionmission', 'Home::visionmission');
 
 // Blog page
 $routes->get('/blog', 'Blog::index');

@@ -100,12 +100,12 @@
               <div class="row">
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
                   <i class="bx bx-receipt"></i>
-                  <h4>History</h4>
-                  <p>our history </p>
+                  <h4><a href="/history">History</a></h4>
+                  <p><a href="/history">Our history</a></p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
                   <i class="bx bx-cube-alt"></i>
-                  <h4>Vision and Mission</h4>
+                  <h4><a href="/visionmission">Vision and Mission</a></h4>
                   <p>our vision</p>
                 </div>
                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
