@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
-					<?php foreach ($data['requests'] as $request): ?>
+					<?php foreach ($data['requests'] as $request) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
 							<td><?= $request['username']; ?></td>
@@ -41,12 +41,12 @@
 							<td>
 								<div class="approve mb-2">
 									<button type="button" id="btn-approve" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>">
-										Approve
+										<i class="fas fa-check-circle"></i> Approve
 									</button>
 								</div>
 								<div class="reject">
 									<button type="button" id="rejectModal" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>">
-										Reject
+										<i class="fas fa-times-circle"></i> Reject
 									</button>
 								</div>
 							</td>
@@ -117,7 +117,7 @@
 </div>
 
 <script>
-	$(document).on('click', '#btn-approve', function () {
+	$(document).on('click', '#btn-approve', function() {
 		let id = $(this).data('id');
 		let name = $(this).data('name');
 

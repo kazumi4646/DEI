@@ -18,9 +18,9 @@
 		<div class="card-body">
 			<?= view('templates/_partials/message'); ?>
 
-			<?php if (in_groups('mitra')): ?>
-				<?php foreach ($data['status'] as $status): ?>
-					<?php if ($status['pembayaran_koperasi'] != 'Lunas'): ?>
+			<?php if (in_groups('mitra')) : ?>
+				<?php foreach ($data['status'] as $status) : ?>
+					<?php if ($status['pembayaran_koperasi'] != 'Lunas') : ?>
 						<div class="alert alert-warning" role="alert">
 							Please <a href="<?= base_url('/payment'); ?>" class="alert-link">confirm your payment</a> before using this feature.
 						</div>
@@ -42,7 +42,7 @@
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
-					<?php foreach ($data['products'] as $product): ?>
+					<?php foreach ($data['products'] as $product) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
 							<td><img src="<?= base_url() . '/uploads/' . $product['image']; ?>" alt="<?= $product['name']; ?>" width="200px"></td>
@@ -54,11 +54,11 @@
 							</td>
 							<td>
 								<div class="btn-edit mb-2">
-									<a href="<?= base_url('/products/' . $product['id'] . '/edit'); ?>" class="btn btn-warning">Edit</a>
+									<a href="<?= base_url('/products/' . $product['id'] . '/edit'); ?>" class="btn btn-sm btn-warning" title="Edit this product"><i class="fas fa-pencil-alt"></i> Edit</a>
 								</div>
 								<div class="btn-delete">
-									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>">
-										Delete
+									<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>">
+										<i class="fas fa-trash-alt" title="Delete this product"></i> Delete
 									</button>
 								</div>
 							</td>
@@ -99,7 +99,7 @@
 </div>
 
 <script>
-	$(document).on('click', '#btn-delete', function () {
+	$(document).on('click', '#btn-delete', function() {
 		let id = $(this).data('id');
 		let name = $(this).data('name');
 

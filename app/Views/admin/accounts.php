@@ -25,7 +25,7 @@
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
-					<?php foreach ($data['accounts'] as $account): ?>
+					<?php foreach ($data['accounts'] as $account) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
 							<td><?= $account['email']; ?></td>
@@ -41,14 +41,14 @@
 							<td>
 								<div class="row">
 									<div class="col-auto mb-2">
-										<button type="button" class="btn <?= ($account['active'] != 0) ? 'btn-warning' : 'btn-dark'; ?>" data-bs-toggle="modal" data-bs-target="#activeModal" id="btn-active" data-id="<?= $account['id']; ?>" data-active="<?= $account['active']; ?>" data-username="<?= $account['username']; ?>">
-											<?= ($account['active'] != 0) ? 'Deactive' : 'Activate'; ?>
+										<button type="button" class="btn btn-sm <?= ($account['active'] != 0) ? 'btn-dark' : 'btn-light'; ?>" data-bs-toggle="modal" data-bs-target="#activeModal" id="btn-active" data-id="<?= $account['id']; ?>" data-active="<?= $account['active']; ?>" data-username="<?= $account['username']; ?>">
+											<?= ($account['active'] != 0) ? '<i class="fas fa-circle text-danger"></i> Deactivate' : '<i class="fas fa-circle text-success"></i> Activate'; ?>
 										</button>
 									</div>
 
 									<div class="col-auto">
-										<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $account['id']; ?>" data-username="<?= $account['username']; ?>">
-											Delete
+										<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $account['id']; ?>" data-username="<?= $account['username']; ?>">
+											<i class="fas fa-trash-alt"></i> Delete
 										</button>
 									</div>
 								</div>
@@ -100,7 +100,7 @@
 						This action will permanently delete the user and their complete profile information with credential "<b><span id="username"></span></b>". <br>
 					</div>
 					<div class="alert alert-warning mt-2 mb-3" role="alert">
-						To continue, please type your password. <br> 
+						To continue, please type your password. <br>
 						Note: <b>This action cannot be undone</b>.
 					</div>
 					<div class="row">
@@ -123,7 +123,7 @@
 
 <script>
 	// Active/Deactive Modal
-	$(document).on('click', '#btn-active', function () {
+	$(document).on('click', '#btn-active', function() {
 		let status;
 		let action = '';
 		let style = '';
@@ -166,7 +166,7 @@
 	});
 
 	// Delete Modal
-	$(document).on('click', '#btn-delete', function () {
+	$(document).on('click', '#btn-delete', function() {
 		let id = $(this).data('id');
 		let username = $(this).data('username');
 

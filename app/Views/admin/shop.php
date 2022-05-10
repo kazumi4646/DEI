@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
-					<?php foreach ($data['shop'] as $product): ?>
+					<?php foreach ($data['shop'] as $product) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
 							<td><img src="<?= base_url() . '/uploads/' . $product['image']; ?>" alt="<?= $product['name']; ?>" width="200px"></td>
@@ -42,27 +42,27 @@
 							</td>
 							<td>
 								<div class="status mb-2">
-									<?php if ($product['shop'] == 'Showed'): ?>
+									<?php if ($product['shop'] == 'Showed') : ?>
 										<form action="<?= base_url('/shop/' . $product['id'] . '/remove'); ?>" method="post">
-											<button type="submit" class="btn btn-warning">Remove from Shop</button>
+											<button type="submit" class="btn btn-sm btn-warning" title="Remove this product from Shopping Page"><i class="fas fa-eye-slash"></i><br>Remove from Shop</button>
 										</form>
 									<?php endif; ?>
-									<?php if ($product['shop'] == 'Not Shown'): ?>
+									<?php if ($product['shop'] == 'Not Shown') : ?>
 										<form action="<?= base_url('/shop/' . $product['id'] . '/show'); ?>" method="post">
-											<button type="submit" class="btn btn-primary">Show to Shop</button>
+											<button type="submit" class="btn btn-sm btn-primary" title="Display this product to Shopping Page"><i class="fas fa-eye"></i><br>Show to Shop</button>
 										</form>
 									<?php endif; ?>
 								</div>
 								<div class="remove">
-									<?php if ($product['seller_id'] != user()->id): ?>
+									<?php if ($product['seller_id'] != user()->id) : ?>
 										<form action="<?= base_url('/shop/' . $product['id'] . '/delete'); ?>" method="post">
-											<button type="submit" class="btn btn-danger">Remove from List</button>
+											<button type="submit" class="btn btn-sm btn-danger" title="Remove partner product from this list"><i class="fas fa-minus-circle"></i><br>Remove from List</button>
 										</form>
 									<?php endif; ?>
-									<?php if ($product['seller_id'] == user()->id): ?>
+									<?php if ($product['seller_id'] == user()->id) : ?>
 										<div class="btn-delete">
-											<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $product['id']; ?>">
-												Delete
+											<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $product['id']; ?>" title="Delete this product">
+												<i class="fas fa-trash-alt"></i><br>Delete Product
 											</button>
 										</div>
 									<?php endif; ?>
@@ -100,7 +100,7 @@
 </div>
 
 <script>
-	$(document).on('click', '#btn-delete', function () {
+	$(document).on('click', '#btn-delete', function() {
 		let id = $(this).data('id');
 
 		$('#id').val(id);
@@ -112,7 +112,6 @@
 
 		$('#deleteForm').attr('action', formAction + id);
 	});
-	
 </script>
 
 <?= $this->endSection(); ?>
