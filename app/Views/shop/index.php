@@ -19,7 +19,7 @@
           <form action="/search" method="POST">
             <div class="input-group mb-3 col-md-3">
               <input type="text" class="form-control" name="keyword" placeholder="Enter Keyword" aria-describedby="search" >
-              <button class="btn btn-outline-secondary" type="button" id="search" style="padding-top:1px">Search</button>
+              <button class="btn btn-outline-secondary" type="button" id="search" style="padding-top:2px">Search</button>
             </div>
           </form>
         </div>
