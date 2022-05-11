@@ -41,13 +41,13 @@
 							<td>
 								<div class="row">
 									<div class="col-auto mb-2">
-										<button type="button" class="btn btn-sm <?= ($account['active'] != 0) ? 'btn-dark' : 'btn-light'; ?>" data-bs-toggle="modal" data-bs-target="#activeModal" id="btn-active" data-id="<?= $account['id']; ?>" data-active="<?= $account['active']; ?>" data-username="<?= $account['username']; ?>">
+										<button type="button" class="btn btn-sm <?= ($account['active'] != 0) ? 'btn-dark' : 'btn-light'; ?>" data-bs-toggle="modal" data-bs-target="#activeModal" id="btn-active" data-id="<?= $account['id']; ?>" data-active="<?= $account['active']; ?>" data-username="<?= $account['username']; ?>" title="<?= ($account['active'] != 0) ? 'Deactivate this account' : 'Activate this account'; ?>">
 											<?= ($account['active'] != 0) ? '<i class="fas fa-circle text-danger"></i> Deactivate' : '<i class="fas fa-circle text-success"></i> Activate'; ?>
 										</button>
 									</div>
 
 									<div class="col-auto">
-										<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $account['id']; ?>" data-username="<?= $account['username']; ?>">
+										<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $account['id']; ?>" data-username="<?= $account['username']; ?>" title="Delete this account">
 											<i class="fas fa-trash-alt"></i> Delete
 										</button>
 									</div>

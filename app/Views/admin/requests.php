@@ -40,12 +40,12 @@
 							<td><span class="badge bg-dark"><?= $request['request']; ?></span></td>
 							<td>
 								<div class="approve mb-2">
-									<button type="button" id="btn-approve" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>">
+									<button type="button" id="btn-approve" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>" title="Approve this product request">
 										<i class="fas fa-check-circle"></i> Approve
 									</button>
 								</div>
 								<div class="reject">
-									<button type="button" id="rejectModal" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>">
+									<button type="button" id="rejectModal" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>" title="Reject this product request">
 										<i class="fas fa-times-circle"></i> Reject
 									</button>
 								</div>

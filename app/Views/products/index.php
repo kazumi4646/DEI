@@ -57,8 +57,8 @@
 									<a href="<?= base_url('/products/' . $product['id'] . '/edit'); ?>" class="btn btn-sm btn-warning" title="Edit this product"><i class="fas fa-pencil-alt"></i> Edit</a>
 								</div>
 								<div class="btn-delete">
-									<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>">
-										<i class="fas fa-trash-alt" title="Delete this product"></i> Delete
+									<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" id="btn-delete" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>" title="Delete this product">
+										<i class="fas fa-trash-alt"></i> Delete
 									</button>
 								</div>
 							</td>
