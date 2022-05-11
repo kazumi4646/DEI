@@ -14,7 +14,7 @@ class OrderModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['user_id', 'trx_id', 'product_id', 'items', 'total_items', 'total_price', 'order_date', 'payment_date', 'status'];
+    protected $allowedFields    = ['user_id', 'trx_id', 'product_id', 'items', 'total_items', 'total_price', 'order_date', 'payment_date', 'payment_proof', 'status'];
 
     // Dates
     protected $useTimestamps = false;
@@ -39,4 +39,15 @@ class OrderModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getAllOrders()
+    {
+        $builder = $this->db->table('orders');
+        $builder->select('orders.*, users.email');
+        $builder->join('users', 'users.id = orders.user_id');
+        $builder->where('orders.status !=', 'Success');
+        $builder->where('orders.status !=', 'Canceled');
+
+        return $builder->get();
+    }
 }

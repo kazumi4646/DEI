@@ -34,7 +34,7 @@
           <?php foreach ($page['cart'] as $product) : ?>
             <div class="row align-items-center fs-6 mt-3">
               <div class="col-3 col-md-2 offset-md-1 ">
-                <img src="<?= base_url('/uploads/' . $product['image']); ?>" alt="<?= $product['name']; ?>" style="max-width: 100%;">
+                <img src="<?= base_url('/uploads/products/' . $product['image']); ?>" alt="<?= $product['name']; ?>" style="max-width: 100%;">
               </div>
               <div class="col-3 col-md-3">
                 <?= $product['name']; ?>
@@ -127,12 +127,13 @@
                 Contact
               </div>
               <div class="col-9">
+                <input type="text" value="<?= user()->email; ?>" class="form-control mb-1" disabled>
                 <input type="text" value="<?= user()->telp; ?>" class="form-control" disabled>
               </div>
             </div>
             <div class="row mt-2">
               <div class="col-3">
-                Address
+                Shipping Address
               </div>
               <div class="col-9">
                 <textarea rows="3" class="form-control" disabled><?= user()->address; ?></textarea>

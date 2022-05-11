@@ -45,7 +45,7 @@
 					<?php foreach ($data['products'] as $product) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
-							<td><img src="<?= base_url() . '/uploads/' . $product['image']; ?>" alt="<?= $product['name']; ?>" width="200px"></td>
+							<td><img src="<?= base_url() . '/uploads/products/' . $product['image']; ?>" alt="<?= $product['name']; ?>" width="200px"></td>
 							<td><?= $product['name']; ?></td>
 							<td><?= $product['price']; ?></td>
 							<td><?= $product['description']; ?></td>

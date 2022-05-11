@@ -13,13 +13,14 @@ class Order extends ResourceController
      */
     public function index()
     {
-        if (! logged_in()) {
+        if (!logged_in()) {
             return redirect()->to(base_url('/login'));
         }
 
         if (in_groups('admin')) {
             $data = [
                 'title' => 'Product Order | Desa Ekspor Indonesia',
+                'orders' => $this->orderModel->getAllOrders()->getResultArray(),
             ];
 
             return view('admin/orders', ['data' => $data]);
@@ -63,9 +64,9 @@ class Order extends ResourceController
     public function create()
     {
         date_default_timezone_set('Asia/Jakarta');
-        
+
         $data = $this->request->getPost();
-        
+
         $this->orderModel->insert([
             'user_id' => user()->id,
             'trx_id' => '#ORD' . date('Ymd') . '-' . user()->id . '-' . rand(1, 9999),

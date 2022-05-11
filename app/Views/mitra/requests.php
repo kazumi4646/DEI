@@ -28,7 +28,7 @@
 					<?php foreach ($data['requests'] as $request) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
-							<td><img src="<?= base_url() . '/uploads/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
+							<td><img src="<?= base_url() . '/uploads/products/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
 							<td><?= $request['name']; ?></td>
 							<td><?= $request['price']; ?></td>
 							<td><?= $request['description']; ?></td>
@@ -58,13 +58,13 @@
 							</td>
 							<td>
 								<?php if ($request['request'] == 'Not Requested' || $request['request'] == 'Rejected') : ?>
-									<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal" id="btn-request" data-id="<?= $request['id']; ?>">
+									<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal" id="btn-request" data-id="<?= $request['id']; ?>" title="Request this product">
 										<i class="fas fa-handshake"></i> Request
 									</button>
 								<?php endif; ?>
 
 								<?php if ($request['request'] == 'Requested' || $request['request'] == 'Approved') : ?>
-									<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal" id="btn-cancel" data-id="<?= $request['id']; ?>" data-status="<?= $request['request']; ?>">
+									<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal" id="btn-cancel" data-id="<?= $request['id']; ?>" data-status="<?= $request['request']; ?>" title="<?= ($request['request'] != 'Approved') ? 'Cancel product request' : 'Remove product request'; ?>">
 										<i class="fas fa-handshake-alt-slash"></i> <?= ($request['request'] != 'Approved') ? 'Cancel' : 'Remove'; ?>
 									</button>
 								<?php endif; ?>

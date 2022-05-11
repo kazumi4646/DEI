@@ -30,7 +30,7 @@
 						<tr>
 							<td><?= $i++; ?></td>
 							<td><?= $request['username']; ?></td>
-							<td><img src="<?= base_url() . '/uploads/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
+							<td><img src="<?= base_url() . '/uploads/products/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
 							<td><?= $request['name']; ?></td>
 							<td><?= $request['price']; ?></td>
 							<td><?= $request['description']; ?></td>

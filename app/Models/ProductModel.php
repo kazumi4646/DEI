@@ -14,7 +14,7 @@ class ProductModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'price', 'description', 'image', 'status', 'request', 'reason', 'shop', 'seller_id'];
+    protected $allowedFields    = ['name', 'price', 'unit_price', 'description', 'image', 'status', 'request', 'reason', 'shop', 'seller_id'];
 
     // Dates
     protected $useTimestamps = false;
@@ -49,12 +49,12 @@ class ProductModel extends Model
 
     public function getShopProduct()
     {
-        $builder = $this->db->table('products'); 
+        $builder = $this->db->table('products');
         $builder->select('products.*, users.username');
         $builder->join('users', 'users.id = products.seller_id');
         $builder->where('products.request', 'Approved');
 
-        return $builder->get();   
+        return $builder->get();
     }
 
     public function getProductRequest()
