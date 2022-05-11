@@ -15,17 +15,52 @@
 					<tr>
 						<th></th>
 						<th>Transaction ID</th>
-						<th>Username</th>
+						<th>Email</th>
 						<th>Items</th>
 						<th>Total Payment</th>
 						<th>Order date</th>
 						<th>Order Status</th>
+						<th>Proof of Payment</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
+					<?php foreach ($data['orders'] as $order) : ?>
+						<tr>
+							<td><?= $i++; ?></td>
+							<td><span class="badge bg-dark"><?= $order['trx_id']; ?></span></td>
+							<td><?= $order['email']; ?></td>
+							<td>
+								<?= ($order['total_items'] > 1) ? $order['total_items'] . ' Items' : $order['total_items'] . ' Item' ?>
+							</td>
+							<td>Rp. <?= number_format($order['total_price'], 0, ',', '.'); ?></td>
+							<td><?= $order['order_date']; ?></td>
+							<td>
+								<?php if ($order['status'] == 'Waiting for Payment') : ?>
+									<span class="badge bg-dark">Waiting for Payment</span>
+								<?php endif; ?>
 
+								<?php if ($order['status'] == 'Paid') : ?>
+									<span class="badge bg-primary">Paid</span>
+								<?php endif; ?>
+
+								<?php if ($order['status'] == 'Proceed') : ?>
+									<span class="badge bg-warning text-dark">Proceed</span>
+								<?php endif; ?>
+
+								<?php if ($order['status'] == 'Delivered') : ?>
+									<span class="badge bg-success">Delivered</span>
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php if ($order['status'] != 'Waiting for Payment') : ?>
+									<a href="#" class="btn btn-sm btn-dark"><i class="fas fa-file-invoice fs-5"></i></a>
+								<?php endif; ?>
+							</td>
+							<td></td>
+						</tr>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>

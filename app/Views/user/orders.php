@@ -19,7 +19,7 @@
 
 	<section class="inner-page">
 		<div class="container">
-			<table id="datatables">
+			<table class="table" id="datatables" style="width: 100%;">
 				<thead>
 					<tr>
 						<th>Transaction ID</th>
@@ -27,10 +27,11 @@
 						<th>Total Price</th>
 						<th>Order Date</th>
 						<th colspan="2">Payment Date</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($page['orders'] as $order): ?>
+					<?php foreach ($page['orders'] as $order) : ?>
 						<tr>
 							<td>
 								<span class="badge bg-dark"><?= $order['trx_id']; ?></span>
@@ -39,22 +40,22 @@
 							<td>Rp. <?= number_format($order['total_price'], 0, ',', '.'); ?></td>
 							<td><?= $order['order_date']; ?></td>
 							<td>
-								<?= $order['payment_date']; ?> 
-								<?php if ($order['status'] == 'Waiting for Payment'): ?>
+								<?= $order['payment_date']; ?>
+								<?php if ($order['status'] == 'Waiting for Payment') : ?>
 									<a href="<?= base_url('/payment'); ?>" title="Learn how to pay">
 										<span class="badge bg-dark"><?= $order['status']; ?></span> <i class="far fa-question-circle text-dark fs-5 align-middle"></i>
 									</a>
 								<?php endif; ?>
 
-								<?php if ($order['status'] == 'Paid' || $order['status'] == 'Proceed' || $order['status'] == 'Delivered'): ?>
+								<?php if ($order['status'] == 'Paid' || $order['status'] == 'Proceed' || $order['status'] == 'Delivered') : ?>
 									<span class="badge bg-primary"><?= $order['status']; ?></span>
 								<?php endif; ?>
 
-								<?php if ($order['status'] == 'Success'): ?>
+								<?php if ($order['status'] == 'Success') : ?>
 									<span class="badge bg-success"><?= $order['status']; ?></span>
 								<?php endif; ?>
 
-								<?php if ($order['status'] == 'Canceled'): ?>
+								<?php if ($order['status'] == 'Canceled') : ?>
 									<span class="badge bg-danger"><?= $order['status']; ?></span>
 								<?php endif; ?>
 							</td>

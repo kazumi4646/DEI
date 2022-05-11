@@ -33,16 +33,16 @@
         <div id="items">
           <?php foreach ($page['cart'] as $product) : ?>
             <div class="row align-items-center fs-6 mt-3">
-              <div class="col-md-2 offset-md-1">
-                <img src="<?= base_url('/uploads/' . $product['image']); ?>" alt="<?= $product['name']; ?>" width="120px">
+              <div class="col-3 col-md-2 offset-md-1 ">
+                <img src="<?= base_url('/uploads/products/' . $product['image']); ?>" alt="<?= $product['name']; ?>" style="max-width: 100%;">
               </div>
-              <div class="col-md-3">
+              <div class="col-3 col-md-3">
                 <?= $product['name']; ?>
               </div>
-              <div class="col-md-2">
-                <?= $product['items']; ?>
+              <div class="col-2 col-md-2">
+                x <?= $product['items']; ?>
               </div>
-              <div class="col-md-3">
+              <div class="col-4 col-md-3">
                 Rp. <?= number_format($product['price'] * $product['items'], 0, ',', '.'); ?>
               </div>
             </div>
@@ -50,15 +50,15 @@
         </div>
         <hr>
         <div class="row">
-          <div class="col-md-2 offset-md-6">
+          <div class="col-5 offset-3 col-md-2 offset-md-6">
             <b>Total Price</b>
           </div>
-          <div class="col-md-2">
+          <div class="col-4 col-md-2 offset-md-0">
             <b>Rp. <?= number_format($page['total'][0]['total'], 0, ',', '.'); ?></b>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-2 offset-md-8">
+          <div class="col-3 offset-8 col-md-2 offset-md-8">
             <button type="button" class="btn get-started-btn" style="margin: 20px 0 !important;" data-bs-toggle="modal" data-bs-target="#checkoutModal">
               Checkout
             </button>
@@ -86,32 +86,26 @@
             <input type="hidden" name="total_items" value="<?= $page['items'][0]['items']; ?>">
             <input type="hidden" name="total_price" value="<?= $page['total'][0]['total']; ?>">
 
-            Your order(s)
-            <div class="col-5">
-              <hr>
-            </div>
+            <p class="mb-2">Your order(s)</p>
             <?php foreach ($page['cart'] as $product) : ?>
               <div class="row">
                 <div class="col-5">
-                  <b><?= $product['name']; ?></b>
+                  <p><?= $product['name']; ?></p>
                 </div>
                 <div class="col-2">
-                  <b>x<?= $product['items']; ?></b>
+                  <p>x <?= $product['items']; ?></p>
                 </div>
                 <div class="col-5">
-                  <b>Rp. <?= number_format($product['price'] * $product['items'], 0, ',', '.'); ?></b>
+                  <p>Rp. <?= number_format($product['price'] * $product['items'], 0, ',', '.'); ?></p>
                 </div>
               </div>
             <?php endforeach; ?>
-            <div class="col-7 offset-5">
-              <hr>
-            </div>
             <div class="row">
               <div class="col-5">
-                Total
+                <b>Total</b>
               </div>
               <div class="col-2">
-                <b>x<?= $page['items'][0]['items']; ?></b>
+                <b>x <?= $page['items'][0]['items']; ?></b>
               </div>
               <div class="col-5">
                 <b>Rp. <?= number_format($page['total'][0]['total'], 0, ',', '.'); ?></b>
@@ -133,12 +127,13 @@
                 Contact
               </div>
               <div class="col-9">
+                <input type="text" value="<?= user()->email; ?>" class="form-control mb-1" disabled>
                 <input type="text" value="<?= user()->telp; ?>" class="form-control" disabled>
               </div>
             </div>
             <div class="row mt-2">
               <div class="col-3">
-                Address
+                Shipping Address
               </div>
               <div class="col-9">
                 <textarea rows="3" class="form-control" disabled><?= user()->address; ?></textarea>

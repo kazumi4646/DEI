@@ -25,10 +25,10 @@
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
-					<?php foreach ($data['requests'] as $request): ?>
+					<?php foreach ($data['requests'] as $request) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
-							<td><img src="<?= base_url() . '/uploads/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
+							<td><img src="<?= base_url() . '/uploads/products/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
 							<td><?= $request['name']; ?></td>
 							<td><?= $request['price']; ?></td>
 							<td><?= $request['description']; ?></td>
@@ -36,19 +36,19 @@
 								<span class="badge <?= $request['status'] == 'Pre Order' ? 'bg-warning text-dark' : ($request['status'] == 'In Stock' ? 'bg-primary' : 'bg-danger'); ?>"><?= $request['status']; ?></span>
 							</td>
 							<td>
-								<?php if ($request['request'] == 'Not Requested'): ?>
+								<?php if ($request['request'] == 'Not Requested') : ?>
 									<span class="badge bg-dark"><?= $request['request']; ?></span>
 								<?php endif; ?>
 
-								<?php if ($request['request'] == 'Requested'): ?>
+								<?php if ($request['request'] == 'Requested') : ?>
 									<span class="badge bg-primary"><?= $request['request']; ?></span>
 								<?php endif; ?>
 
-								<?php if ($request['request'] == 'Approved'): ?>
+								<?php if ($request['request'] == 'Approved') : ?>
 									<span class="badge bg-success"><?= $request['request']; ?></span>
 								<?php endif; ?>
 
-								<?php if ($request['request'] == 'Rejected'): ?>
+								<?php if ($request['request'] == 'Rejected') : ?>
 									<span class="badge bg-danger"><?= $request['request']; ?></span>
 									<div class="alert alert-warning mt-2" role="alert">
 										<b>Reject Reason:</b><br>
@@ -57,15 +57,15 @@
 								<?php endif; ?>
 							</td>
 							<td>
-								<?php if ($request['request'] == 'Not Requested' || $request['request'] == 'Rejected'): ?>
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal" id="btn-request" data-id="<?= $request['id']; ?>">
-										Request
+								<?php if ($request['request'] == 'Not Requested' || $request['request'] == 'Rejected') : ?>
+									<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal" id="btn-request" data-id="<?= $request['id']; ?>" title="Request this product">
+										<i class="fas fa-handshake"></i> Request
 									</button>
 								<?php endif; ?>
 
-								<?php if ($request['request'] == 'Requested' || $request['request'] == 'Approved'): ?>
-									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal" id="btn-cancel" data-id="<?= $request['id']; ?>" data-status="<?= $request['request']; ?>">
-										<?= ($request['request'] != 'Approved') ? 'Cancel' : 'Remove'; ?>
+								<?php if ($request['request'] == 'Requested' || $request['request'] == 'Approved') : ?>
+									<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal" id="btn-cancel" data-id="<?= $request['id']; ?>" data-status="<?= $request['request']; ?>" title="<?= ($request['request'] != 'Approved') ? 'Cancel product request' : 'Remove product request'; ?>">
+										<i class="fas fa-handshake-alt-slash"></i> <?= ($request['request'] != 'Approved') ? 'Cancel' : 'Remove'; ?>
 									</button>
 								<?php endif; ?>
 							</td>
@@ -88,7 +88,7 @@
 			<form action="<?= base_url(); ?>/requests/" method="post" id="requestForm">
 				<div class="modal-body">
 					<input type="hidden" name="id" id="id" value="">
-					You're about to request this product to display be on Desa Ekspor Indonesia <a href="<?= base_url('/shop'); ?>">Shopping Page</a>.
+					You're about to request this product to be displayed on Desa Ekspor Indonesia <a href="<?= base_url('/shop'); ?>">Shopping Page</a>.
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -110,7 +110,7 @@
 			<form action="<?= base_url(); ?>/requests/" method="post" id="cancelForm">
 				<div class="modal-body">
 					<input type="hidden" name="id" id="id" value="">
-					<span id="status"></span> on Desa Ekspor Indonesia <a href="<?= base_url('/shop'); ?>">Shopping Page</a>.
+					<span id="status"></span> Desa Ekspor Indonesia <a href="<?= base_url('/shop'); ?>">Shopping Page</a>.
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -123,7 +123,7 @@
 
 <script>
 	// Request Modal
-	$(document).on('click', '#btn-request', function () {
+	$(document).on('click', '#btn-request', function() {
 		let id = $(this).data('id');
 
 		$('#id').val(id);
@@ -137,17 +137,17 @@
 	});
 
 	// Cancel Modal
-	$(document).on('click', '#btn-cancel', function () {
+	$(document).on('click', '#btn-cancel', function() {
 		let id = $(this).data('id');
 		let status = $(this).data('status');
 		let message = '';
 		let action = '';
 
 		if (status != 'Approved') {
-			message = "You'll need to request this product again in order to be displayed";
+			message = "You'll need to request this product again in order to be displayed on";
 			action = 'Cancel Product Request';
 		} else {
-			message = "You're about to remove this product";
+			message = "You're about to remove this product from";
 			action = 'Remove Product';
 		}
 

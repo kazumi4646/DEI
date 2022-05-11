@@ -26,11 +26,11 @@
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
-					<?php foreach ($data['requests'] as $request): ?>
+					<?php foreach ($data['requests'] as $request) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
 							<td><?= $request['username']; ?></td>
-							<td><img src="<?= base_url() . '/uploads/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
+							<td><img src="<?= base_url() . '/uploads/products/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
 							<td><?= $request['name']; ?></td>
 							<td><?= $request['price']; ?></td>
 							<td><?= $request['description']; ?></td>
@@ -40,13 +40,13 @@
 							<td><span class="badge bg-dark"><?= $request['request']; ?></span></td>
 							<td>
 								<div class="approve mb-2">
-									<button type="button" id="btn-approve" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>">
-										Approve
+									<button type="button" id="btn-approve" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>" title="Approve this product request">
+										<i class="fas fa-check-circle"></i> Approve
 									</button>
 								</div>
 								<div class="reject">
-									<button type="button" id="rejectModal" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>">
-										Reject
+									<button type="button" id="rejectModal" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject" data-id="<?= $request['id']; ?>" data-name="<?= $request['name']; ?>" title="Reject this product request">
+										<i class="fas fa-times-circle"></i> Reject
 									</button>
 								</div>
 							</td>
@@ -117,7 +117,7 @@
 </div>
 
 <script>
-	$(document).on('click', '#btn-approve', function () {
+	$(document).on('click', '#btn-approve', function() {
 		let id = $(this).data('id');
 		let name = $(this).data('name');
 

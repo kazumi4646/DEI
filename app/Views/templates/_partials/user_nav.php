@@ -24,7 +24,7 @@
             <li><a href="<?= base_url('/profile'); ?>"><?= user()->username; ?></a></li>
             <hr class="my-0">
             <li><a href="<?= base_url('/profile'); ?>">My Profile</a></li>
-            <li><a href="<?= base_url('/logout'); ?>">Logout</a></li>
+            <li><a data-bs-toggle="modal" data-bs-target="#logoutModal" href="<?= base_url('/logout'); ?>">Logout</a></li>
           </ul>
         </li>
       </ul>

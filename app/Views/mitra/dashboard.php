@@ -18,16 +18,16 @@
 			?>
 		</h4>
 		<p>
-			<?php foreach ($data['status'] as $status): ?>
-				<?php if ($status['pembayaran_koperasi'] != 'Lunas'): ?>
+			<?php foreach ($data['status'] as $status) : ?>
+				<?php if ($status['pembayaran_koperasi'] != 'Lunas') : ?>
 					Please <a href="<?= base_url('/payment'); ?>" class="alert-link" style="text-decoration: underline;">confirm your payment</a> before using our feature.
 				<?php endif; ?>
 
-				<?php if (user()->address == null && $status['pembayaran_koperasi'] == 'Lunas'): ?>
+				<?php if (user()->address == null && $status['pembayaran_koperasi'] == 'Lunas') : ?>
 					You can complete your profile by <a href="<?= base_url('/profile'); ?>" class="alert-link" style="text-decoration: underline;">refer to this page</a>.
 				<?php endif; ?>
 
-				<?php if (user()->address != null && $status['pembayaran_koperasi'] == 'Lunas'): ?>
+				<?php if (user()->address != null && $status['pembayaran_koperasi'] == 'Lunas') : ?>
 					You don't have any new notification available.
 				<?php endif; ?>
 			<?php endforeach; ?>
@@ -53,10 +53,10 @@
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
-					<?php foreach ($data['requests'] as $request): ?>
+					<?php foreach ($data['requests'] as $request) : ?>
 						<tr>
 							<td><?= $i++; ?></td>
-							<td><img src="<?= base_url() . '/uploads/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
+							<td><img src="<?= base_url() . '/uploads/products/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
 							<td><?= $request['name']; ?></td>
 							<td><?= $request['price']; ?></td>
 							<td><?= $request['description']; ?></td>

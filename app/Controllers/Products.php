@@ -110,14 +110,13 @@ class Products extends ResourceController
             ],
         ];
 
-        if (! $this->validate($rules))
-        {
+        if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
         $image = $this->request->getFile('image');
         $filename = $image->getRandomName();
-        $image->move('uploads/', $filename);
+        $image->move('uploads/products/', $filename);
 
         if (in_groups('admin')) {
             $request = 'Approved';
@@ -198,8 +197,7 @@ class Products extends ResourceController
             ],
         ];
 
-        if (! $this->validate($rules))
-        {
+        if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
@@ -210,10 +208,10 @@ class Products extends ResourceController
             $filename = $this->request->getPost('old_image');
         } else {
             $filename = $new_image->getRandomName();
-            $new_image->move('uploads/', $filename);
-            
-            if (file_exists('uploads/' . $old_image)) {
-                unlink('uploads/' . $old_image);
+            $new_image->move('uploads/products/', $filename);
+
+            if (file_exists('uploads/products/' . $old_image)) {
+                unlink('uploads/products/' . $old_image);
             }
         }
 
@@ -237,7 +235,7 @@ class Products extends ResourceController
     public function delete($id = null)
     {
         $product = $this->productModel->find($id);
-        $path = 'uploads/' . $product['image'];
+        $path = 'uploads/products/' . $product['image'];
 
         if (file_exists($path)) {
             unlink($path);

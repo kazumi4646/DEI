@@ -29,8 +29,8 @@
 
   <!-- Template Main CSS File -->
   <link href="<?= base_url(); ?>/assets/css/home.css" rel="stylesheet">
-  
-  <script src="<?= base_url(); ?>/assets/js/jquery-3.4.1.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -38,6 +38,25 @@
   <?= $this->renderSection('content'); ?>
 
   <?= $this->include('templates/_partials/home_footer'); ?>
+
+  <!-- Logout Modal -->
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="logoutModalLabel">Logout?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          You'll need to login again.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <a type="button" class="btn btn-danger" href="<?= base_url('/logout'); ?>">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Vendor JS Files -->
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
