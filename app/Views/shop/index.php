@@ -38,6 +38,8 @@
   .detail {
     display: flex;
     flex-direction: column;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .detail a {
@@ -46,6 +48,7 @@
     font-weight: 700;
     letter-spacing: 0.5px;
     padding-right: 8px;
+    text-overflow: ellipsis;
   }
 
   .detail span {

@@ -83,6 +83,7 @@ $routes->post('/requests/(.*)/cancel', 'Mitra::cancel_request/$1', ['filter' => 
 
 // User Routes
 $routes->resource('cart', ['filter' => 'role:user']);
+$routes->post('/cart/min', 'Cart::min_product', ['filter' => 'role:user']);
 
 /*
  * --------------------------------------------------------------------

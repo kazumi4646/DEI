@@ -16,19 +16,17 @@
               <div class="card-body">
                 <form action="<?= base_url('/register') ?>" method="post">
                   <?= csrf_field() ?>
-                  <input type="hidden" name="nasmnsad" value="saj">
-
                   <div class="form-floating mb-3">
-                    <input class="form-control <?php if(session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" type="email" placeholder="<?=lang('Auth.email')?>" value="<?= old('email') ?>"/>
-                    <label for="email"><?=lang('Auth.email')?></label>
+                    <input class="form-control <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" type="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" autofocus />
+                    <label for="email"><?= lang('Auth.email') ?></label>
                     <div class="invalid-feedback">
                       <?= session('errors.email') ?>
                     </div>
                   </div>
 
                   <div class="form-floating mb-3">
-                    <input class="form-control <?php if(session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" type="text" placeholder="<?=lang('Auth.username')?>" value="<?= old('username') ?>"/>
-                    <label for="username"><?=lang('Auth.username')?></label>
+                    <input class="form-control <?php if (session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" type="text" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>" />
+                    <label for="username"><?= lang('Auth.username') ?></label>
                     <div class="invalid-feedback">
                       <?= session('errors.username') ?>
                     </div>
@@ -37,8 +35,8 @@
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control <?php if(session('errors.password') || session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" name="password" type="password" placeholder="<?=lang('Auth.password')?>" autocomplete="off"/>
-                        <label for="password"><?=lang('Auth.password')?></label>
+                        <input class="form-control <?php if (session('errors.password') || session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" name="password" type="password" placeholder="<?= lang('Auth.password') ?>" autocomplete="off" />
+                        <label for="password"><?= lang('Auth.password') ?></label>
                         <div class="invalid-feedback">
                           <?= session('errors.password') ?>
                         </div>
@@ -46,8 +44,8 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control <?php if(session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" name="pass_confirm" type="password" placeholder="<?=lang('Auth.repeatPassword')?>" autocomplete="off"/>
-                        <label for="pass_confirm"><?=lang('Auth.repeatPassword')?></label>
+                        <input class="form-control <?php if (session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" name="pass_confirm" type="password" placeholder="<?= lang('Auth.repeatPassword') ?>" autocomplete="off" />
+                        <label for="pass_confirm"><?= lang('Auth.repeatPassword') ?></label>
                         <div class="invalid-feedback">
                           <?= session('errors.pass_confirm') ?>
                         </div>
@@ -62,7 +60,7 @@
                         I agree to the <a href="<?= base_url('/terms'); ?>">terms of service</a>.
                       </label>
                     </div>
-                    <button type="submit" id="btn-submit" class="btn btn-primary btn-block float-end disabled"><?=lang('Auth.register')?></button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-block float-end disabled"><?= lang('Auth.register') ?></button>
                   </div>
                 </form>
               </div>
@@ -97,7 +95,7 @@
 </div>
 
 <script>
-  $(document).keypress(function(event){
+  $(document).keypress(function(event) {
     if (event.which == '13') {
       event.preventDefault();
     }
