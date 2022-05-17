@@ -105,7 +105,7 @@
 					</div>
 					<div class="row">
 						<div class="col-3">
-							Password
+							Password <span class="text-danger">*</span>
 						</div>
 						<div class="col-9">
 							<input type="password" name="confirm" class="form-control" cols="5" rows="3" placeholder="Your Password">
