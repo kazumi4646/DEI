@@ -107,6 +107,11 @@ class Order extends ResourceController
                 'payment_date' => date('Y-m-d H:i:s'),
                 'status' => $status,
             ])->update();
+        } else if ($status == 'Delivered') {
+            $this->orderModel->where('id', $id)->set([
+                'status' => $status,
+                'shipping_number' => $this->request->getPost('shippingNumber'),
+            ])->update();
         } else if ($status == 'Cancel') {
             $this->orderModel->where('id', $id)->set([
                 'status' => $status,

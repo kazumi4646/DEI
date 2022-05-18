@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 11, 2022 at 01:03 PM
+-- Generation Time: May 18, 2022 at 06:41 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -221,7 +221,18 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (104, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-11 04:25:35', 1),
 (105, '::1', 'mitra@dei.com', 7, '2022-05-11 04:27:33', 1),
 (106, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-11 04:28:15', 1),
-(107, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-11 04:51:06', 1);
+(107, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-11 04:51:06', 1),
+(108, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-11 20:50:35', 1),
+(109, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-12 02:10:46', 1),
+(110, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-12 02:11:52', 1),
+(111, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-13 03:31:25', 1),
+(112, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-13 03:40:23', 1),
+(113, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-13 07:34:53', 1),
+(114, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-13 08:23:30', 1),
+(115, '::1', 'admin', NULL, '2022-05-16 02:42:25', 0),
+(116, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-16 02:42:29', 1),
+(117, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-16 21:11:05', 1),
+(118, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-18 01:21:02', 1);
 
 -- --------------------------------------------------------
 
@@ -294,13 +305,6 @@ CREATE TABLE `carts` (
   `product_id` int(11) UNSIGNED NOT NULL,
   `items` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`id`, `user_id`, `product_id`, `items`) VALUES
-(3, 11, 18, 1);
 
 -- --------------------------------------------------------
 
@@ -7628,17 +7632,18 @@ CREATE TABLE `orders` (
   `total_price` bigint(20) NOT NULL,
   `order_date` datetime NOT NULL,
   `payment_date` datetime DEFAULT NULL,
-  `payment_proof` text,
-  `status` enum('Waiting for Payment','Paid','Proceed','Delivered','Success','Canceled') NOT NULL DEFAULT 'Waiting for Payment'
+  `status` enum('Waiting for Payment','Paid','Proceed','Delivered','Success','Canceled') NOT NULL DEFAULT 'Waiting for Payment',
+  `shipping_number` text,
+  `status_message` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `trx_id`, `product_id`, `items`, `total_items`, `total_price`, `order_date`, `payment_date`, `payment_proof`, `status`) VALUES
-(3, 11, '#ORD20220304-11-1393', '18', '1', 1, 1900000, '2022-03-04 09:27:11', NULL, NULL, 'Paid'),
-(4, 11, '#ORD20220510-11-8401', '18', '2', 2, 3800000, '2022-05-10 13:31:08', NULL, 'test.png', 'Waiting for Payment');
+INSERT INTO `orders` (`id`, `user_id`, `trx_id`, `product_id`, `items`, `total_items`, `total_price`, `order_date`, `payment_date`, `status`, `shipping_number`, `status_message`) VALUES
+(6, 11, '#ORD11-20220513-1542', '18', '5', 5, 9500000, '2022-05-13 15:42:05', '2022-05-16 16:49:06', 'Delivered', '#SHP11-20220518-1335', NULL),
+(7, 11, '#ORD11-20220513-1548', '18', '1', 1, 1900000, '2022-05-13 15:48:07', '2022-05-16 16:29:43', 'Success', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -7666,7 +7671,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `price`, `unit_price`, `description`, `image`, `status`, `request`, `reason`, `shop`, `seller_id`) VALUES
 (12, 'asfvu', 1830120, '', '13kahsvfa', '1644508644_09bf544afa90dbfa1623.png', 'In Stock', 'Not Requested', 'jelek cokk, ga bakal laku blokkkkk', 'Not Shown', 7),
-(18, 'Leather Wallet', 1900000, '', 'a;shfpaisf', '1645420095_ea7f96a0fe4dfde2c587.jpg', 'In Stock', 'Approved', NULL, 'Showed', 1);
+(18, 'Leather Wallet Original Crocodile', 1900000, '', 'a;shfpaisf', '1645420095_ea7f96a0fe4dfde2c587.jpg', 'In Stock', 'Approved', NULL, 'Showed', 1);
 
 -- --------------------------------------------------------
 
@@ -91982,7 +91987,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -92006,7 +92011,7 @@ ALTER TABLE `auth_tokens`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -92024,7 +92029,7 @@ ALTER TABLE `mitra`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`
