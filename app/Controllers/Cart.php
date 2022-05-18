@@ -13,7 +13,7 @@ class Cart extends ResourceController
      */
     public function index()
     {
-        if (! logged_in()) {
+        if (!logged_in()) {
             return redirect()->to(base_url('/login'));
         }
 
@@ -102,6 +102,21 @@ class Cart extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        $this->cartModel->deleteCartItem($id, user()->id);
+
+        return redirect()->to(base_url('/cart'));
+    }
+
+    public function min_product()
+    {
+        $id = $this->request->getPost('product_id');
+        $cart = $this->cartModel->checkProductCart($id)->getResultArray();
+
+        $this->cartModel->save([
+            'id' => $cart[0]['id'],
+            'items' => $cart[0]['items'] - 1,
+        ]);
+
+        return redirect()->to(base_url('/cart'));
     }
 }

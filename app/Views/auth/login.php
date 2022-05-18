@@ -20,24 +20,24 @@
                   <?= csrf_field() ?>
 
                   <div class="form-floating mb-3">
-                    <input type="text" name="login" class="form-control <?php if(session('errors.login')) : ?>is-invalid<?php endif ?>" placeholder="<?=lang('Auth.emailOrUsername')?>" />
-                    <label for="login"><?=lang('Auth.emailOrUsername')?></label>
+                    <input type="text" name="login" class="form-control <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.emailOrUsername') ?>" autofocus />
+                    <label for="login"><?= lang('Auth.emailOrUsername') ?></label>
                     <div class="invalid-feedback">
                       <?= session('errors.login') ?>
                     </div>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="password" name="password" class="form-control <?php if(session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?=lang('Auth.password')?>" />
-                    <label for="password"><?=lang('Auth.password')?></label>
+                    <input type="password" name="password" class="form-control <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.password') ?>" />
+                    <label for="password"><?= lang('Auth.password') ?></label>
                     <div class="invalid-feedback">
                       <?= session('errors.password') ?>
                     </div>
                   </div>
                   <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                    <?php if ($config->activeResetter): ?>
+                    <?php if ($config->activeResetter) : ?>
                       <a href="<?= base_url('/forgot') ?>">Forgot password?</a>
                     <?php endif; ?>
-                    <button type="submit" class="btn btn-primary btn-block"><?=lang('Auth.loginAction')?></button>
+                    <button type="submit" class="btn btn-primary btn-block"><?= lang('Auth.loginAction') ?></button>
                   </div>
                 </form>
               </div>

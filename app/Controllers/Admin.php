@@ -50,7 +50,7 @@ class Admin extends BaseController
 			return redirect()->to(base_url('/accounts'))->with('success', 'Account deactivated!');
 		} else {
 			return redirect()->to(base_url('/accounts'))->with('success', 'Account activated!');
-		}		
+		}
 	}
 
 	public function delete_account($id)
@@ -58,8 +58,7 @@ class Admin extends BaseController
 		$password = $this->request->getPost('confirm');
 		$user = $this->userModel->where('username', user()->username)->first();
 
-		if (! Password::verify($password, $user->password_hash))
-		{
+		if (!Password::verify($password, $user->password_hash)) {
 			return redirect()->to(base_url('/accounts'))->with('error', 'Your password is not valid!');
 		}
 
@@ -73,6 +72,7 @@ class Admin extends BaseController
 		$data = [
 			'request' => 'Approved',
 			'shop' => 'Showed',
+			'reason' => NULL,
 		];
 
 		$this->productModel->where('id', $id)->set($data)->update();
@@ -121,6 +121,7 @@ class Admin extends BaseController
 		];
 
 		$this->productModel->where('id', $id)->set($data)->update();
+		$this->cartModel->where('product_id', $id)->delete();
 
 		return redirect()->to(base_url('/dashboard/shop'))->with('success', 'Product removed from shop!');
 	}
@@ -133,6 +134,7 @@ class Admin extends BaseController
 		];
 
 		$this->productModel->where('id', $id)->set($data)->update();
+		$this->cartModel->where('product_id', $id)->delete();
 
 		return redirect()->to(base_url('/dashboard/shop'))->with('success', 'Product removed from list!');
 	}

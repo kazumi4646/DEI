@@ -18,16 +18,16 @@
                   <?= csrf_field() ?>
 
                   <div class="form-floating mb-3">
-                    <input class="form-control <?php if(session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" type="email" placeholder="<?=lang('Auth.email')?>" value="<?= old('email') ?>"/>
-                    <label for="email"><?=lang('Auth.email')?></label>
+                    <input class="form-control <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" type="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" autofocus />
+                    <label for="email"><?= lang('Auth.email') ?></label>
                     <div class="invalid-feedback">
                       <?= session('errors.email') ?>
                     </div>
                   </div>
 
                   <div class="form-floating mb-3">
-                    <input class="form-control <?php if(session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" type="text" placeholder="<?=lang('Auth.username')?>" value="<?= old('username') ?>"/>
-                    <label for="username"><?=lang('Auth.username')?></label>
+                    <input class="form-control <?php if (session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" type="text" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>" />
+                    <label for="username"><?= lang('Auth.username') ?></label>
                     <div class="invalid-feedback">
                       <?= session('errors.username') ?>
                     </div>
@@ -36,8 +36,8 @@
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <div class="form-floating mb-3 mb-md-3">
-                        <input class="form-control <?php if(session('errors.password') || session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" name="password" type="password" placeholder="<?=lang('Auth.password')?>" autocomplete="off"/>
-                        <label for="password"><?=lang('Auth.password')?></label>
+                        <input class="form-control <?php if (session('errors.password') || session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" name="password" type="password" placeholder="<?= lang('Auth.password') ?>" autocomplete="off" />
+                        <label for="password"><?= lang('Auth.password') ?></label>
                         <div class="invalid-feedback">
                           <?= session('errors.password') ?>
                         </div>
@@ -45,8 +45,8 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating mb-3 mb-md-3">
-                        <input class="form-control <?php if(session('errors.password') || session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" name="pass_confirm" type="password" placeholder="<?=lang('Auth.repeatPassword')?>" autocomplete="off"/>
-                        <label for="pass_confirm"><?=lang('Auth.repeatPassword')?></label>
+                        <input class="form-control <?php if (session('errors.password') || session('errors.pass_confirm')) : ?>is-invalid<?php endif ?>" name="pass_confirm" type="password" placeholder="<?= lang('Auth.repeatPassword') ?>" autocomplete="off" />
+                        <label for="pass_confirm"><?= lang('Auth.repeatPassword') ?></label>
                         <div class="invalid-feedback">
                           <?= session('errors.pass_confirm') ?>
                         </div>
@@ -55,7 +55,7 @@
                   </div>
 
                   <div class="form-floating mb-3">
-                    <input class="form-control <?php if(session('errors.name')) : ?>is-invalid<?php endif ?>" name="name" type="text" placeholder="Name" value="<?= old('name') ?>"/>
+                    <input class="form-control <?php if (session('errors.name')) : ?>is-invalid<?php endif ?>" name="name" type="text" placeholder="Name" value="<?= old('name') ?>" />
                     <label for="name">Name</label>
                     <div class="invalid-feedback">
                       <?= session('errors.name') ?>
@@ -63,7 +63,7 @@
                   </div>
 
                   <div class="form-floating mb-3">
-                    <input class="form-control <?php if(session('errors.birth')) : ?>is-invalid<?php endif ?>" name="birth" type="date" placeholder="Date of Birth" value="<?= old('birth') ?>"/>
+                    <input class="form-control <?php if (session('errors.birth')) : ?>is-invalid<?php endif ?>" name="birth" type="date" placeholder="Date of Birth" value="<?= old('birth') ?>" />
                     <label for="birth">Date of Birth</label>
                     <div class="invalid-feedback">
                       <?= session('errors.birth') ?>
@@ -73,7 +73,7 @@
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control <?php if(session('errors.no_ktp')) : ?>is-invalid<?php endif ?>" name="no_ktp" type="number" placeholder="NIK" value="<?= old('no_ktp') ?>"/>
+                        <input class="form-control <?php if (session('errors.no_ktp')) : ?>is-invalid<?php endif ?>" name="no_ktp" type="number" placeholder="NIK" value="<?= old('no_ktp') ?>" />
                         <label for="no_ktp">NIK</label>
                         <div class="invalid-feedback">
                           <?= session('errors.no_ktp') ?>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating mb-md-0">
-                        <input class="form-control <?php if(session('errors.no_kk')) : ?>is-invalid<?php endif ?>" name="no_kk" type="number" placeholder="No. Kartu Keluarga" value="<?= old('no_kk') ?>"/>
+                        <input class="form-control <?php if (session('errors.no_kk')) : ?>is-invalid<?php endif ?>" name="no_kk" type="number" placeholder="No. Kartu Keluarga" value="<?= old('no_kk') ?>" />
                         <label for="no_kk">No. Kartu Keluarga</label>
                         <div class="invalid-feedback">
                           <?= session('errors.no_kk') ?>
@@ -94,9 +94,9 @@
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <div class="form-floating mb-3 mb-md-0">
-                        <select name="province" id="province" class="form-control <?php if(session('errors.province')) : ?>is-invalid<?php endif ?>" placeholder="Province">
+                        <select name="province" id="province" class="form-control <?php if (session('errors.province')) : ?>is-invalid<?php endif ?>" placeholder="Province">
                           <option value="<?= (empty(old('province'))) ? '' : old('province') ?>" selected><?= (empty(old('province'))) ? 'Provinsi' : old('province') ?></option>
-                          <?php foreach ($data['province'] as $provinsi): ?>
+                          <?php foreach ($data['province'] as $provinsi) : ?>
                             <option value="<?= $provinsi['name']; ?>"><?= $provinsi['name']; ?></option>
                           <?php endforeach; ?>
                         </select>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating mb-md-0">
-                        <select name="city" id="city" class="form-control <?php if(session('errors.city')) : ?>is-invalid<?php endif ?>" placeholder="City">
+                        <select name="city" id="city" class="form-control <?php if (session('errors.city')) : ?>is-invalid<?php endif ?>" placeholder="City">
                           <option value="<?= (empty(old('city'))) ? '' : old('city') ?>" selected><?= (empty(old('city'))) ? 'Mohon Pilih Provinsi' : old('city') ?></option>
                         </select>
                         <label for="city">City</label>
@@ -122,7 +122,7 @@
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <div class="form-floating mb-3 mb-md-0">
-                        <select name="districts" id="districts" class="form-control <?php if(session('errors.districts')) : ?>is-invalid<?php endif ?>" placeholder="Districts">
+                        <select name="districts" id="districts" class="form-control <?php if (session('errors.districts')) : ?>is-invalid<?php endif ?>" placeholder="Districts">
                           <option value="<?= (empty(old('districts'))) ? '' : old('districts') ?>" selected><?= (empty(old('districts'))) ? 'Mohon Pilih Kabupaten/Kota' : old('districts') ?></option>
                         </select>
                         <label for="districts">Districts</label>
@@ -133,7 +133,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating mb-md-0">
-                        <select name="village" id="village" class="form-control <?php if(session('errors.village')) : ?>is-invalid<?php endif ?>" placeholder="Village">
+                        <select name="village" id="village" class="form-control <?php if (session('errors.village')) : ?>is-invalid<?php endif ?>" placeholder="Village">
                           <option value="<?= (empty(old('village'))) ? '' : old('village') ?>" selected><?= (empty(old('village'))) ? 'Mohon Pilih Kecamatan' : old('village') ?></option>
                         </select>
                         <label for="village">Village</label>
@@ -147,7 +147,7 @@
                   <div class="row mb-3">
                     <div class="col-md-4">
                       <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control <?php if(session('errors.komoditas')) : ?>is-invalid<?php endif ?>" name="komoditas" type="number" placeholder="Banyak Komoditas" value="<?= old('komoditas') ?>"/>
+                        <input class="form-control <?php if (session('errors.komoditas')) : ?>is-invalid<?php endif ?>" name="komoditas" type="number" placeholder="Banyak Komoditas" value="<?= old('komoditas') ?>" />
                         <label for="komoditas">Banyak Komoditas</label>
                         <div class="invalid-feedback">
                           <?= session('errors.komoditas') ?>
@@ -156,7 +156,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control <?php if(session('errors.populasi')) : ?>is-invalid<?php endif ?>" name="populasi" type="number" placeholder="Populasi Pohon" value="<?= old('populasi') ?>"/>
+                        <input class="form-control <?php if (session('errors.populasi')) : ?>is-invalid<?php endif ?>" name="populasi" type="number" placeholder="Populasi Pohon" value="<?= old('populasi') ?>" />
                         <label for="populasi">Populasi Pohon</label>
                         <div class="invalid-feedback">
                           <?= session('errors.populasi') ?>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-floating mb-md-0">
-                        <input class="form-control <?php if(session('errors.tahun_tanam')) : ?>is-invalid<?php endif ?>" name="tahun_tanam" type="number" placeholder="Tahun Tanam" value="<?= old('tahun_tanam') ?>"/>
+                        <input class="form-control <?php if (session('errors.tahun_tanam')) : ?>is-invalid<?php endif ?>" name="tahun_tanam" type="number" placeholder="Tahun Tanam" value="<?= old('tahun_tanam') ?>" />
                         <label for="tahun_tanam">Tahun Tanam</label>
                         <div class="invalid-feedback">
                           <?= session('errors.tahun_tanam') ?>
@@ -177,7 +177,7 @@
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control <?php if(session('errors.luas_lahan')) : ?>is-invalid<?php endif ?>" name="luas_lahan" type="number" placeholder="Luas Lahan" value="<?= old('luas_lahan') ?>"/>
+                        <input class="form-control <?php if (session('errors.luas_lahan')) : ?>is-invalid<?php endif ?>" name="luas_lahan" type="number" placeholder="Luas Lahan" value="<?= old('luas_lahan') ?>" />
                         <label for="luas_lahan">Luas Lahan (m<sup>2</sup>)</label>
                         <div class="invalid-feedback">
                           <?= session('errors.luas_lahan') ?>
@@ -186,7 +186,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating mb-md-0">
-                        <input class="form-control <?php if(session('errors.jumlah_panen')) : ?>is-invalid<?php endif ?>" name="jumlah_panen" type="number" placeholder="Jumlah Panen" value="<?= old('jumlah_panen') ?>"/>
+                        <input class="form-control <?php if (session('errors.jumlah_panen')) : ?>is-invalid<?php endif ?>" name="jumlah_panen" type="number" placeholder="Jumlah Panen" value="<?= old('jumlah_panen') ?>" />
                         <label for="jumlah_panen">Jumlah Panen</label>
                         <div class="invalid-feedback">
                           <?= session('errors.jumlah_panen') ?>
@@ -202,7 +202,7 @@
                         I agree to the <a href="<?= base_url('/terms'); ?>">terms of service</a>.
                       </label>
                     </div>
-                    <button type="submit" id="btn-submit" class="btn btn-primary btn-block float-end disabled"><?=lang('Auth.register')?></button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-block float-end disabled"><?= lang('Auth.register') ?></button>
                   </div>
                 </form>
               </div>
@@ -237,7 +237,7 @@
 </div>
 
 <script>
-  $(document).keypress(function(event){
+  $(document).keypress(function(event) {
     if (event.which == '13') {
       event.preventDefault();
     }
@@ -248,7 +248,7 @@
       let province_name = $(this).val();
       let name = $(this).val().replaceAll(' ', '_');
       let url = "<?= site_url('mitra/ajax_city'); ?>/" + name;
-      
+
       $('#city').load(url);
       $('#city').prop('selectedIndex', 0);
       $('#districts').prop('selectedIndex', 0);
@@ -260,7 +260,7 @@
     $('#city').change(function() {
       let name = $(this).val().replaceAll(' ', '_');
       let url = "<?= site_url('mitra/ajax_district'); ?>/" + name;
-      
+
       $('#districts').load(url);
       $('#districts').prop('selectedIndex', 0);
       $('#village').prop('selectedIndex', 0);
@@ -271,7 +271,7 @@
     $('#districts').change(function() {
       let name = $(this).val().replaceAll(' ', '_');
       let url = "<?= site_url('mitra/ajax_village'); ?>/" + name;
-      
+
       $('#village').load(url);
       $('#village').prop('selectedIndex', 0);
 

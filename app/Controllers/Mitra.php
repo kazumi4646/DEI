@@ -25,7 +25,7 @@ class Mitra extends BaseController
 		$cities = $this->regencyModel->getCity($province)->getResult();
 
 		foreach ($cities as $city) {
-			$data .= "<option value='". $city->name ."'>". $city->name ."</option>";
+			$data .= "<option value='" . $city->name . "'>" . $city->name . "</option>";
 		}
 
 		echo $data;
@@ -37,7 +37,7 @@ class Mitra extends BaseController
 		$districts = $this->districtModel->getDistrict($city)->getResult();
 
 		foreach ($districts as $district) {
-			$data .= "<option value='". $district->name ."'>". $district->name ."</option>";
+			$data .= "<option value='" . $district->name . "'>" . $district->name . "</option>";
 		}
 
 		echo $data;
@@ -49,7 +49,7 @@ class Mitra extends BaseController
 		$villages = $this->villageModel->getVillage($district)->getResult();
 
 		foreach ($villages as $village) {
-			$data .= "<option value='". $village->name ."'>". $village->name ."</option>";
+			$data .= "<option value='" . $village->name . "'>" . $village->name . "</option>";
 		}
 
 		echo $data;
@@ -171,8 +171,7 @@ class Mitra extends BaseController
 			],
 		];
 
-		if (! $this->validate($rules))
-		{
+		if (!$this->validate($rules)) {
 			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
 		}
 
@@ -193,8 +192,7 @@ class Mitra extends BaseController
 			],
 		];
 
-		if (! $this->validate($rules))
-		{
+		if (!$this->validate($rules)) {
 			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
 		}
 
@@ -244,10 +242,12 @@ class Mitra extends BaseController
 	{
 		$data = [
 			'request' => 'Not Requested',
+			'shop' => 'Not Shown',
 		];
 
 		$this->productModel->where('id', $id)->set($data)->update();
+		$this->cartModel->where('product_id', $id)->delete();
 
-		return redirect()->to(base_url('/requests'))->with('success', 'Product Request removed!');
+		return redirect()->to(base_url('/requests'))->with('success', 'Product request removed!');
 	}
 }

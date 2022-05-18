@@ -29,7 +29,7 @@ class Order extends ResourceController
         if (in_groups('user')) {
             $page = [
                 'title' => 'My Orders | Desa Ekspor Indonesia',
-                'orders' => $this->orderModel->where('user_id', user()->id)->findAll(),
+                'orders' => $this->orderModel->where('user_id', user()->id)->orderBy('order_date', 'DESC')->findAll(),
             ];
 
             return view('user/orders', ['page' => $page]);
@@ -69,7 +69,7 @@ class Order extends ResourceController
 
         $this->orderModel->insert([
             'user_id' => user()->id,
-            'trx_id' => '#ORD' . date('Ymd') . '-' . user()->id . '-' . rand(1, 9999),
+            'trx_id' => '#ORD' . user()->id . '-' . date('Ymd') . '-' . date('H') . date('i'),
             'product_id' => $data['product_id'],
             'items' => $data['items'],
             'total_items' => $data['total_items'],
@@ -98,7 +98,32 @@ class Order extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        date_default_timezone_set('Asia/Jakarta');
+
+        $status = $this->request->getPost('status');
+
+        if ($status == 'Paid') {
+            $this->orderModel->where('id', $id)->set([
+                'payment_date' => date('Y-m-d H:i:s'),
+                'status' => $status,
+            ])->update();
+        } else if ($status == 'Cancel') {
+            $this->orderModel->where('id', $id)->set([
+                'status' => $status,
+                'status_message' => $this->request->getPost('message'),
+            ])->update();
+        } else {
+            $this->orderModel->where('id', $id)->set([
+                'status' => $status,
+            ])->update();
+        }
+
+        if ($status == 'Success' || $status == 'Cancel') {
+            // TODO: add status detail message
+            return redirect()->to(base_url('/orders/history'))->with('success', 'Order status updated!');
+        } else {
+            return redirect()->to(base_url('/orders'))->with('success', 'Order status changed to "' . $status .  '"!');
+        }
     }
 
     /**

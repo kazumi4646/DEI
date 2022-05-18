@@ -26,8 +26,8 @@
 						<th>Total Items</th>
 						<th>Total Price</th>
 						<th>Order Date</th>
-						<th colspan="2">Payment Date</th>
-						<th></th>
+						<th>Payment Date</th>
+						<th>Order Status</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,7 +40,15 @@
 							<td>Rp. <?= number_format($order['total_price'], 0, ',', '.'); ?></td>
 							<td><?= $order['order_date']; ?></td>
 							<td>
-								<?= $order['payment_date']; ?>
+								<?php if (!$order['payment_date']) : ?>
+									<a href="<?= base_url('/payment'); ?>" class="text-dark" title="Learn why Not Available"><i>Not Available</i> <i class="far fa-question-circle text-dark fs-5 align-middle"></i></a>
+								<?php endif; ?>
+
+								<?php if ($order['payment_date']) : ?>
+									<p><?= $order['payment_date']; ?></p>
+								<?php endif; ?>
+							</td>
+							<td>
 								<?php if ($order['status'] == 'Waiting for Payment') : ?>
 									<a href="<?= base_url('/payment'); ?>" title="Learn how to pay">
 										<span class="badge bg-dark"><?= $order['status']; ?></span> <i class="far fa-question-circle text-dark fs-5 align-middle"></i>

@@ -32,6 +32,18 @@
       <?php if (count($page['cart']) > 0) : ?>
         <div id="items">
           <?php foreach ($page['cart'] as $product) : ?>
+            <form action="<?= base_url('/cart'); ?>" method="post" id="add-item">
+              <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+            </form>
+
+            <form action="<?= base_url('/cart/min'); ?>" method="post" id="min-item">
+              <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+            </form>
+
+            <form action="<?= base_url('/cart/' . $product['id']); ?>" method="post" id="del-item">
+              <input type="hidden" name="_method" value="DELETE">
+            </form>
+
             <div class="row align-items-center fs-6 mt-3">
               <div class="col-3 col-md-2 offset-md-1 ">
                 <img src="<?= base_url('/uploads/products/' . $product['image']); ?>" alt="<?= $product['name']; ?>" style="max-width: 100%;">
@@ -40,10 +52,13 @@
                 <?= $product['name']; ?>
               </div>
               <div class="col-2 col-md-2">
-                x <?= $product['items']; ?>
+                <button type="submit" form="min-item" class="btn btn-sm" <?= ($product['items'] == 1) ? 'disabled' : ''; ?>><i class="fas fa-minus"></i></button>
+                <span class="px-2">x <?= $product['items']; ?></span>
+                <button type="submit" form="add-item" class="btn btn-sm"><i class="fas fa-plus"></i></button>
               </div>
               <div class="col-4 col-md-3">
                 Rp. <?= number_format($product['price'] * $product['items'], 0, ',', '.'); ?>
+                <button type="submit" form="del-item" class="btn" style="color: #e03a3c;"><i class="fas fa-trash-alt"></i></button>
               </div>
             </div>
           <?php endforeach; ?>
