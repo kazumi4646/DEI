@@ -12,12 +12,12 @@ class OrderModel extends Model
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['user_id', 'trx_id', 'product_id', 'items', 'total_items', 'total_price', 'order_date', 'payment_date', 'status', 'receipt_number', 'status_message'];
+    protected $allowedFields    = ['user_id', 'trx_id', 'product_id', 'items', 'total_items', 'total_price', 'order_date', 'payment_date', 'status', 'shipping_number', 'status_message'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -47,6 +47,17 @@ class OrderModel extends Model
         $builder->join('users', 'users.id = orders.user_id');
         $builder->where('orders.status !=', 'Success');
         $builder->where('orders.status !=', 'Canceled');
+
+        return $builder->get();
+    }
+
+    public function getOrderHistory()
+    {
+        $builder = $this->db->table('orders');
+        $builder->select('orders.*, users.email');
+        $builder->join('users', 'users.id = orders.user_id');
+        $builder->where('orders.status', 'Success');
+        $builder->orWhere('orders.status', 'Canceled');
 
         return $builder->get();
     }

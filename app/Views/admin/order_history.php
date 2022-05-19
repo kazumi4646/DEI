@@ -15,7 +15,7 @@
 					<tr>
 						<th></th>
 						<th>Transaction ID</th>
-						<th>Username</th>
+						<th>Email</th>
 						<th>Total Payment</th>
 						<th>Order date</th>
 						<th>Payment date</th>
@@ -24,7 +24,29 @@
 				</thead>
 				<tbody>
 					<?php $i = 1; ?>
+					<?php foreach ($data['histories'] as $history) : ?>
+						<tr>
+							<td><?= $i++; ?></td>
+							<td><span class="badge bg-dark"><?= $history['trx_id']; ?></span></td>
+							<td><?= $history['email']; ?></td>
+							<td>Rp. <?= number_format($history['total_price'], 0, ',', '.'); ?></td>
+							<td><?= $history['order_date']; ?></td>
+							<td <?= (!$history['payment_date'] && $history['status'] == 'Canceled') ? 'colspan="2" class="text-center"' : ''; ?>>
+								<?php if ($history['payment_date']) : ?>
+									<?= $history['payment_date']; ?>
+								<?php endif; ?>
 
+								<?php if ($history['status'] == 'Canceled') : ?>
+									<span class="badge bg-danger">Canceled</span>
+								<?php endif; ?>
+							</td>
+							<?php if ($history['status'] == 'Success') : ?>
+								<td>
+									<span class="badge bg-success">Success</span>
+								</td>
+							<?php endif; ?>
+						</tr>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>

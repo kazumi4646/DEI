@@ -66,7 +66,7 @@
 								<?php endif; ?>
 
 								<?php if ($order['status'] == 'Proceed') : ?>
-									<button type="button" id="btn-status" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#statusModal" data-id="<?= $order['id']; ?>" data-trx_id="<?= $order['trx_id']; ?>" data-status="Delivered" title="Deliver this order">
+									<button type="button" id="btn-deliver" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#deliverModal" data-id="<?= $order['id']; ?>" data-trx_id="<?= $order['trx_id']; ?>" data-status="Delivered" title="Deliver this order">
 										<i class="fas fa-truck"></i> Deliver Order
 									</button>
 								<?php endif; ?>
@@ -77,7 +77,7 @@
 									</button>
 								<?php endif; ?>
 
-								<?php if ($order['status'] != 'Delivered') : ?>
+								<?php if ($order['status'] == 'Waiting for Payment') : ?>
 									<button type="button" id="btn-cancel" class="btn btn-sm bg-danger text-light mt-1" data-bs-toggle="modal" data-bs-target="#cancelModal" data-id="<?= $order['id']; ?>" data-trx_id="<?= $order['trx_id']; ?>" data-status="Success" title="Cancel this order">
 										<i class="fas fa-times-circle"></i> Cancel Order
 									</button>
@@ -111,6 +111,42 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 					<span id="submitButton"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Deliver Modal -->
+<div class="modal fade" id="deliverModal" tabindex="-1" aria-labelledby="deliverModalWindow" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deliverModalWindow">Deliver Order?</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form action="<?= base_url(); ?>/orders/" method="post" id="deliverForm">
+				<div class="modal-body">
+					<input type="hidden" name="_method" value="PUT">
+					<input type="hidden" name="status" value="Delivered">
+					<div id="info">
+						This action will state <span class="badge bg-success">Delivered</span> order with Transaction ID <span class="badge bg-dark" id="deliver_trx_id"></span>.
+					</div>
+					<div class="alert alert-warning mt-3">
+						Note: <b>Please fill this order shipping number</b>.
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<label for="shippingNumber" class="col-form-label">Shipping Number <span class="text-danger">*</span></label>
+						</div>
+						<div class="col-8">
+							<input type="text" name="shippingNumber" id="shippingNumber" class="form-control" placeholder="Order Shipping Number" required>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-success" title="Deliver this order">Deliver Order</button>
 				</div>
 			</form>
 		</div>
@@ -169,11 +205,6 @@
 			$('#modalWindow').html('Proceed Order?');
 			$('#statusBadge').html('<span class="badge bg-dark">' + status + '</span>');
 			$('#submitButton').html('<button type="submit" class="btn btn-dark" title="Proceed this order">Proceed Order</button>');
-		} else if (status == 'Delivered') {
-			$('#modalWindow').html('Deliver Order?');
-			$('#statusBadge').html('<span class="badge bg-success">' + status + '</span>');
-			$('#submitButton').html('<button type="submit" class="btn btn-success" title="Deliver this order">Deliver Order</button>');
-			$('#statusAlert').html('<div class="alert alert-warning mt-3">Note: <b>Please make sure the product is ready to delivered.</b>.</div>');
 		} else if (status == 'Success') {
 			$('#modalWindow').html('Finish Order?');
 			$('#statusBadge').html('<span class="badge bg-success">' + status + '</span>');
@@ -184,6 +215,15 @@
 		$('#trx_id').html(trx_id);
 		$('#status').val(status);
 		$('#statusForm').attr('action', formAction + id);
+	});
+
+	$(document).on('click', '#btn-deliver', function() {
+		let id = $(this).data('id');
+		let trx_id = $(this).data('trx_id');
+		let formAction = $('#deliverForm').attr('action');
+
+		$('#deliver_trx_id').html(trx_id);
+		$('#deliverForm').attr('action', formAction + id);
 	});
 
 	$(document).on('click', '#btn-cancel', function() {

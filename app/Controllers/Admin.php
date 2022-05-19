@@ -138,13 +138,4 @@ class Admin extends BaseController
 
 		return redirect()->to(base_url('/dashboard/shop'))->with('success', 'Product removed from list!');
 	}
-
-	public function order_history()
-	{
-		$data = [
-			'title' => 'Order History | Desa Ekspor Indonesia',
-		];
-
-		return view('admin/order_history', ['data' => $data]);
-	}
 }

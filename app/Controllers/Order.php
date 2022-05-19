@@ -107,6 +107,11 @@ class Order extends ResourceController
                 'payment_date' => date('Y-m-d H:i:s'),
                 'status' => $status,
             ])->update();
+        } else if ($status == 'Delivered') {
+            $this->orderModel->where('id', $id)->set([
+                'status' => $status,
+                'shipping_number' => $this->request->getPost('shippingNumber'),
+            ])->update();
         } else if ($status == 'Cancel') {
             $this->orderModel->where('id', $id)->set([
                 'status' => $status,
@@ -120,7 +125,7 @@ class Order extends ResourceController
 
         if ($status == 'Success' || $status == 'Cancel') {
             // TODO: add status detail message
-            return redirect()->to(base_url('/orders/history'))->with('success', 'Order status updated!');
+            return redirect()->to(base_url('/order/history'))->with('success', 'Order status updated!');
         } else {
             return redirect()->to(base_url('/orders'))->with('success', 'Order status changed to "' . $status .  '"!');
         }
@@ -134,5 +139,15 @@ class Order extends ResourceController
     public function delete($id = null)
     {
         //
+    }
+
+    public function history()
+    {
+        $data = [
+            'title' => 'Order History | Desa Ekspor Indonesia',
+            'histories' => $this->orderModel->getOrderHistory()->getResultArray(),
+        ];
+
+        return view('admin/order_history', ['data' => $data]);
     }
 }
