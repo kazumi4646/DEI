@@ -125,7 +125,7 @@ class Order extends ResourceController
 
         if ($status == 'Success' || $status == 'Cancel') {
             // TODO: add status detail message
-            return redirect()->to(base_url('/orders/history'))->with('success', 'Order status updated!');
+            return redirect()->to(base_url('/order/history'))->with('success', 'Order status updated!');
         } else {
             return redirect()->to(base_url('/orders'))->with('success', 'Order status changed to "' . $status .  '"!');
         }
@@ -139,5 +139,15 @@ class Order extends ResourceController
     public function delete($id = null)
     {
         //
+    }
+
+    public function history()
+    {
+        $data = [
+            'title' => 'Order History | Desa Ekspor Indonesia',
+            'histories' => $this->orderModel->getOrderHistory()->getResultArray(),
+        ];
+
+        return view('admin/order_history', ['data' => $data]);
     }
 }

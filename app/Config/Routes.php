@@ -74,7 +74,7 @@ $routes->post('/accounts/(.*)/status', 'Admin::account_status/$1', ['filter' => 
 $routes->post('/accounts/(.*)/delete', 'Admin::delete_account/$1', ['filter' => 'role:admin']);
 $routes->post('/requests/(.*)/approve', 'Admin::approve_request/$1', ['filter' => 'role:admin']);
 $routes->post('/requests/reject', 'Admin::reject_request', ['filter' => 'role:admin']);
-$routes->get('/orders/history', 'Admin::order_history', ['filter' => 'role:admin']);
+$routes->get('/order/history', 'Order::history', ['filter' => 'role:admin']);
 
 // Mitra Routes
 $routes->get('/payment', 'Mitra::payment', ['filter' => 'role:mitra']);

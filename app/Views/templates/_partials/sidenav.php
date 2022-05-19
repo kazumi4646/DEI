@@ -39,7 +39,7 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                     Product Order
                 </a>
-                <a class="nav-link" href="<?= base_url('/orders/history'); ?>">
+                <a class="nav-link" href="<?= base_url('/order/history'); ?>">
                     <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                     Order History
                 </a>
