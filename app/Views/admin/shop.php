@@ -31,7 +31,7 @@
 							<td><?= $i++; ?></td>
 							<td><img src="<?= base_url() . '/uploads/products/' . $product['image']; ?>" alt="<?= $product['name']; ?>" width="200px"></td>
 							<td><?= $product['name']; ?></td>
-							<td><?= $product['price']; ?></td>
+							<td><?= 'Rp. ' . number_format($product['price'], 0, ',', '.') . '/' . $product['unit_price']; ?></td>
 							<td><?= $product['description']; ?></td>
 							<td><?= $product['username']; ?></td>
 							<td>

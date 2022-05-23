@@ -22,7 +22,7 @@
     <div class="portfolio-info">
       <h3><?= $page['product']['name']; ?></h3>
       <ul>
-        <li><b style="color: #111; font-size: 1.1em;">Rp. <?= number_format($page['product']['price'], 0, ",", "."); ?><span style="font-size: .9rem;">/g</span></b></li>
+        <li><b style="color: #111; font-size: 1.1em;">Rp. <?= number_format($page['product']['price'], 0, ",", "."); ?><span style="font-size: .8rem;">/<?= $page['product']['unit_price']; ?></span></b></li>
         <li>
           <?php if ($page['product']['status'] == 'In Stock') : ?>
             <span class="badge bg-primary">In Stock</span>

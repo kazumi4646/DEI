@@ -168,13 +168,13 @@
               <div class="slide-img">
                 <img src="<?= base_url('/uploads/products/' . $product['image']); ?>" alt="1" />
                 <div class="overlay">
-                  <a href="#" class="buy-btn">Buy Now</a>
+                  <a href="<?= base_url($product['id'] . '/detail'); ?>" class="buy-btn">See Detail</a>
                 </div>
               </div>
               <div class="detail-product">
                 <div class="detail">
                   <a href="<?= base_url($product['id'] . '/detail'); ?>" class="price"><?= $product['name']; ?></a>
-                  <span>Rp. <?= number_format($product['price'], 0, ',', '.'); ?></span>
+                  <span>Rp. <?= number_format($product['price'], 0, ',', '.'); ?><span style="font-size: .9rem;">/<?= $product['unit_price']; ?></span></span>
                 </div>
               </div>
               <div class="button m-2">
