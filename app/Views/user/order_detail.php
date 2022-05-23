@@ -67,7 +67,7 @@
                         <?php if ($page['orders']['status'] != 'Canceled') : ?>
                             <span>Shipping Number:</span>
                             <p class="fw-bold mb-2">
-                                <?= (!$page['orders']['shipping_number'] && $page['orders']['status'] != 'Canceled') ? '<i class="fw-normal">Not Available</i>' : $page['orders']['shipping_number']; ?>
+                                <?= (!$page['orders']['shipping_number'] && $page['orders']['status'] != 'Canceled') ? '<i class="fw-normal">Not Available</i>' : '<span class="badge bg-dark">' . $page['orders']['shipping_number'] . '</span>'; ?>
                             </p>
                         <?php endif; ?>
                     </div>
@@ -129,7 +129,7 @@
                                 Shipping Number
                             </div>
                             <div class="col-8 mb-1">
-                                : <?= (!$page['orders']['shipping_number'] && $page['orders']['status'] != 'Canceled') ? '<i class="fw-normal">Not Available</i>' : $page['orders']['shipping_number']; ?>
+                                : <?= (!$page['orders']['shipping_number'] && $page['orders']['status'] != 'Canceled') ? '<i class="fw-normal">Not Available</i>' : '<span class="badge bg-dark">' . $page['orders']['shipping_number'] . '</span>'; ?>
                             </div>
                         <?php endif; ?>
                     </div>

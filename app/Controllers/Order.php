@@ -46,29 +46,14 @@ class Order extends ResourceController
         if (in_groups('user')) {
             $orders = $this->orderModel->find($id);
 
-            $arrayKey = ['price', 'image', 'qty'];
-
             $detailName = explode(',', $orders['product_id']);
             $detailPrice = explode(',', $orders['items_price']);
             $detailImage = explode(',', $orders['items_image']);
             $detailQty = explode(',', $orders['items']);
 
-            // $orderDetail = [];
-            // $values = [$productPrice, $productImage, $productQty];
-            // foreach ($productName as $index => $key) {
-            //     $t = [];
-
-            //     foreach ($values as $value) {
-            //         $t[] = $value[$index];
-            //     }
-
-            //     $orderDetail[$key] = $t;
-            // }
-
             $page = [
                 'title' => 'Order Detail | Desa Ekspor Indonesia',
                 'orders' => $orders,
-                // 'details' => $orderDetail,
                 'detailName' => $detailName,
                 'detailPrice' => $detailPrice,
                 'detailImage' => $detailImage,

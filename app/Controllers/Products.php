@@ -88,6 +88,12 @@ class Products extends ResourceController
                     'numeric' => 'Product Price should only contain numeric characters.',
                 ]
             ],
+            'unit'     => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'This field is required.',
+                ]
+            ],
             'description'     => [
                 'rules' => 'required',
                 'errors' => [
@@ -126,9 +132,16 @@ class Products extends ResourceController
             $shop = 'Not Shown';
         }
 
+        if (empty($this->request->getPost('per')) || $this->request->getPost('per') == '1') {
+            $unit_price = $this->request->getPost('unit');
+        } else {
+            $unit_price = $this->request->getPost('per') . $this->request->getPost('unit');
+        }
+
         $this->productModel->insert([
             'name' => $this->request->getPost('name'),
             'price' => $this->request->getPost('price'),
+            'unit_price' => $unit_price,
             'description' => $this->request->getPost('description'),
             'image' => $filename,
             'status' => $this->request->getPost('status'),
@@ -176,6 +189,12 @@ class Products extends ResourceController
                     'numeric' => 'Product Price should only contain numeric characters.',
                 ]
             ],
+            'unit'     => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'This field is required.',
+                ]
+            ],
             'description'     => [
                 'rules' => 'required',
                 'errors' => [
@@ -215,10 +234,17 @@ class Products extends ResourceController
             }
         }
 
+        if (empty($this->request->getPost('per')) || $this->request->getPost('per') == '1') {
+            $unit_price = $this->request->getPost('unit');
+        } else {
+            $unit_price = $this->request->getPost('per') . $this->request->getPost('unit');
+        }
+
         $this->productModel->save([
             'id' => $id,
             'name' => $this->request->getPost('name'),
             'price' => $this->request->getPost('price'),
+            'unit_price' => $unit_price,
             'description' => $this->request->getPost('description'),
             'image' => $filename,
             'status' => $this->request->getPost('status'),
