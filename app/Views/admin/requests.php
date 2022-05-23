@@ -32,7 +32,7 @@
 							<td><?= $request['username']; ?></td>
 							<td><img src="<?= base_url() . '/uploads/products/' . $request['image']; ?>" alt="<?= $request['name']; ?>" width="200px"></td>
 							<td><?= $request['name']; ?></td>
-							<td><?= $request['price']; ?></td>
+							<td><?= 'Rp. ' . number_format($request['price'], 0, ',', '.') . '/' . $request['unit_price']; ?></td>
 							<td><?= $request['description']; ?></td>
 							<td>
 								<span class="badge <?= $request['status'] == 'Pre Order' ? 'bg-warning text-dark' : ($request['status'] == 'In Stock' ? 'bg-primary' : 'bg-danger'); ?>"><?= $request['status']; ?></span>

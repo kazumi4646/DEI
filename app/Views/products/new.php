@@ -15,7 +15,7 @@
 						<label for="name" class="form-label">Product Name <span class="text-danger">*</span></label>
 					</div>
 					<div class="col-12 col-md-9">
-						<input type="text" class="form-control <?php if(session('errors.name')) : ?>is-invalid<?php endif ?>" name="name" id="name" placeholder="Product Name" value="<?= old('name'); ?>">
+						<input type="text" class="form-control <?php if (session('errors.name')) : ?>is-invalid<?php endif ?>" name="name" id="name" placeholder="Product Name" value="<?= old('name'); ?>">
 						<div class="invalid-feedback">
 							<?= session('errors.name') ?>
 						</div>
@@ -26,9 +26,35 @@
 						<label for="price" class="form-label">Product Price <span class="text-danger">*</span></label>
 					</div>
 					<div class="col-12 col-md-9">
-						<input type="number" class="form-control <?php if(session('errors.price')) : ?>is-invalid<?php endif ?>" name="price" id="price" placeholder="Product Price" value="<?= old('price'); ?>">
-						<div class="invalid-feedback">
-							<?= session('errors.price') ?>
+						<div class="input-group">
+							<div class="col-7 col-md-8">
+								<input type="number" class="form-control <?php if (session('errors.price')) : ?>is-invalid<?php endif ?>" name="price" id="price" placeholder="Product Price" value="<?= old('price'); ?>">
+								<div class="invalid-feedback">
+									<?= session('errors.price') ?>
+								</div>
+							</div>
+							<div class="col-1 col-md-1">
+								<span class="input-group-text justify-content-center">/</span>
+							</div>
+							<div class="col-2 col-md-2">
+								<input type="number" name="per" class="form-control" placeholder="per" min="1">
+								<div class="invalid-feedback">
+									<?= session('errors.per') ?>
+								</div>
+							</div>
+							<div class="col-2 col-md-1">
+								<select class="form-control" name="unit">
+									<option value="g">g</option>
+									<option value="kg">kg</option>
+									<option value="cm">cm</option>
+									<option value="m">m</option>
+									<option value="litre">litre</option>
+									<option value="item">item</option>
+								</select>
+								<div class="invalid-feedback">
+									<?= session('errors.unit') ?>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -37,7 +63,7 @@
 						<label for="description" class="form-label">Product Description <span class="text-danger">*</span></label>
 					</div>
 					<div class="col-12 col-md-9">
-						<textarea name="description" id="description" cols="5" rows="3" class="form-control <?php if(session('errors.description')) : ?>is-invalid<?php endif ?>" placeholder="Product Description"><?= old('description'); ?></textarea>
+						<textarea name="description" id="description" cols="5" rows="3" class="form-control <?php if (session('errors.description')) : ?>is-invalid<?php endif ?>" placeholder="Product Description"><?= old('description'); ?></textarea>
 						<div class="invalid-feedback">
 							<?= session('errors.description') ?>
 						</div>
@@ -48,7 +74,7 @@
 						<label for="status" class="form-label">Product Status <span class="text-danger">*</span></label>
 					</div>
 					<div class="col-12 col-md-9">
-						<select name="status" id="status" class="form-control <?php if(session('errors.status')) : ?>is-invalid<?php endif ?>">
+						<select name="status" id="status" class="form-control <?php if (session('errors.status')) : ?>is-invalid<?php endif ?>">
 							<option value="<?= (empty(old('status'))) ? '' : old('status'); ?>" selected><?= (empty(old('status'))) ? 'Product Status' : old('status'); ?></option>
 							<option value="Pre Order">Pre Order</option>
 							<option value="In Stock">In Stock</option>
@@ -64,7 +90,7 @@
 						<label for="image" class="form-label">Product Image <span class="text-danger">*</span></label>
 					</div>
 					<div class="col-12 col-md-9">
-						<input type="file" class="form-control <?php if(session('errors.image')) : ?>is-invalid<?php endif ?>" accept="image/*" name="image" id="image" placeholder="Product Image" value="<?= old('image'); ?>" onchange="showPreview(event)">
+						<input type="file" class="form-control <?php if (session('errors.image')) : ?>is-invalid<?php endif ?>" accept="image/*" name="image" id="image" placeholder="Product Image" value="<?= old('image'); ?>" onchange="showPreview(event)">
 						<div class="invalid-feedback">
 							<?= session('errors.image') ?>
 						</div>
@@ -84,8 +110,7 @@
 </div>
 
 <script>
-	function showPreview(event)
-	{
+	function showPreview(event) {
 		if (event.target.files.length > 0) {
 			let src = URL.createObjectURL(event.target.files[0]);
 			let preview = document.getElementById('preview');

@@ -28,9 +28,32 @@
 						<label for="price" class="form-label">Product Price <span class="text-danger">*</span></label>
 					</div>
 					<div class="col-12 col-md-9">
-						<input type="number" class="form-control <?php if (session('errors.price')) : ?>is-invalid<?php endif ?>" name="price" id="price" placeholder="Product Price" value="<?= $data['product']['price']; ?>">
-						<div class="invalid-feedback">
-							<?= session('errors.price') ?>
+						<div class="input-group">
+							<div class="col-7 col-md-8">
+								<input type="number" class="form-control <?php if (session('errors.price')) : ?>is-invalid<?php endif ?>" name="price" id="price" placeholder="Product Price" value="<?= $data['product']['price']; ?>">
+								<div class="invalid-feedback">
+									<?= session('errors.price') ?>
+								</div>
+							</div>
+							<div class="col-1 col-md-1">
+								<span class="input-group-text justify-content-center">/</span>
+							</div>
+							<div class="col-2 col-md-2">
+								<input type="number" name="per" class="form-control" placeholder="per" value="<?= (preg_replace('/[^0-9.]/', '', $data['product']['unit_price']) == '') ? '1' : preg_replace('/[^0-9.]/', '', $data['product']['unit_price']); ?>" min="1">
+							</div>
+							<div class="col-2 col-md-1">
+								<select class="form-control" name="unit">
+									<option value="g" <?= (preg_replace('/[^a-z]/', '', $data['product']['unit_price']) == 'g') ? 'selected' : ''; ?>>g</option>
+									<option value="kg" <?= (preg_replace('/[^a-z]/', '', $data['product']['unit_price']) == 'kg') ? 'selected' : ''; ?>>kg</option>
+									<option value="cm" <?= (preg_replace('/[^a-z]/', '', $data['product']['unit_price']) == 'cm') ? 'selected' : ''; ?>>cm</option>
+									<option value="m" <?= (preg_replace('/[^a-z]/', '', $data['product']['unit_price']) == 'm') ? 'selected' : ''; ?>>m</option>
+									<option value="litre" <?= (preg_replace('/[^a-z]/', '', $data['product']['unit_price']) == 'litre') ? 'selected' : ''; ?>>litre</option>
+									<option value="item" <?= (preg_replace('/[^a-z]/', '', $data['product']['unit_price']) == 'item') ? 'selected' : ''; ?>>item</option>
+								</select>
+								<div class="invalid-feedback">
+									<?= session('errors.unit') ?>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

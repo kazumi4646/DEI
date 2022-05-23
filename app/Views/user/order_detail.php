@@ -10,9 +10,9 @@
         <div class="container">
             <ol>
                 <li><a href="<?= base_url('/orders'); ?>"><?= (in_groups('user')) ? 'My ' : ''; ?>Orders</a></li>
-                <li>Detail</li>
+                <li>Order Details</li>
             </ol>
-            <h2>Detail</h2>
+            <h2>Order Details</h2>
         </div>
     </section><!-- End Breadcrumbs -->
 
@@ -67,7 +67,7 @@
                         <?php if ($page['orders']['status'] != 'Canceled') : ?>
                             <span>Shipping Number:</span>
                             <p class="fw-bold mb-2">
-                                <?= (!$page['orders']['shipping_number'] && $page['orders']['status'] != 'Canceled') ? '<i class="fw-normal">Not Available</i>' : $page['orders']['shipping_number']; ?>
+                                <?= (!$page['orders']['shipping_number'] && $page['orders']['status'] != 'Canceled') ? '<i class="fw-normal">Not Available</i>' : '<span class="badge bg-dark">' . $page['orders']['shipping_number'] . '</span>'; ?>
                             </p>
                         <?php endif; ?>
                     </div>
@@ -75,7 +75,7 @@
 
                 <!-- Order overview (other screen) -->
                 <div class="col-7 d-none d-md-block">
-                    <div class="row fw-bold mb-3">
+                    <div class="row fw-bold mb-4">
                         <div class="col-4 mb-1">
                             Transaction ID
                         </div>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="col-8 mb-1">
                                 <?php if (!$page['orders']['payment_date'] && $page['orders']['status'] != 'Canceled') : ?>
-                                    <span class="fw-normal fst-italic">: Not Available <?= (in_groups('user')) ? '<a href="' . base_url('/payment') .  '"><i class="far fa-question-circle text-dark fs-5 align-middle"></i></a>' : ''; ?></span>
+                                    : <span class="fw-normal fst-italic">Not Available <?= (in_groups('user')) ? '<a href="' . base_url('/payment') .  '"><i class="far fa-question-circle text-dark fs-5 align-middle"></i></a>' : ''; ?></span>
                                 <?php endif; ?>
 
                                 <?php if ($page['orders']['payment_date']) : ?>
@@ -129,7 +129,7 @@
                                 Shipping Number
                             </div>
                             <div class="col-8 mb-1">
-                                : <?= (!$page['orders']['shipping_number'] && $page['orders']['status'] != 'Canceled') ? '<i class="fw-normal">Not Available</i>' : $page['orders']['shipping_number']; ?>
+                                : <?= (!$page['orders']['shipping_number'] && $page['orders']['status'] != 'Canceled') ? '<i class="fw-normal">Not Available</i>' : '<span class="badge bg-dark">' . $page['orders']['shipping_number'] . '</span>'; ?>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -168,7 +168,7 @@
                 <!-- Customer overview (responsive) -->
                 <div class="col-12 col-md-5">
                     <div class="portfolio-info d-md-block">
-                        <h3>Customer Details</h3>
+                        <h3>Customer Detail</h3>
                         <div class="mb-3">
                             <span>Customer Name:</span>
                             <p><b><?= $page['orders']['customer_name']; ?></b></p>
@@ -188,7 +188,7 @@
                 <!-- Order details (mobile) -->
                 <div class="col-12 col-md-5">
                     <div class="portfolio-info d-block d-md-none">
-                        <h3>Order Details</h3>
+                        <h3>Transaction Detail</h3>
                         <?php for ($i = 0; $i < count($page['detailName']); $i++) : ?>
                             <div class="row align-items-start mb-2">
                                 <div class="col-4">

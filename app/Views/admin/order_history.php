@@ -20,6 +20,7 @@
 						<th>Order date</th>
 						<th>Payment date</th>
 						<th>Order Status</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,6 +46,9 @@
 									<span class="badge bg-success">Success</span>
 								</td>
 							<?php endif; ?>
+							<td>
+								<a href="<?= base_url('/orders/' . $history['id']); ?>" class="btn btn-sm btn-outline-dark"><i class="fas fa-info-circle"></i> Detail</a>
+							</td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>

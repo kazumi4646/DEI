@@ -43,38 +43,27 @@ class Order extends ResourceController
      */
     public function show($id = null)
     {
+        $orders = $this->orderModel->find($id);
+
+        $detailName = explode(',', $orders['product_id']);
+        $detailPrice = explode(',', $orders['items_price']);
+        $detailImage = explode(',', $orders['items_image']);
+        $detailQty = explode(',', $orders['items']);
+
+        $page = [
+            'title' => 'Order Detail | Desa Ekspor Indonesia',
+            'orders' => $orders,
+            'detailName' => $detailName,
+            'detailPrice' => $detailPrice,
+            'detailImage' => $detailImage,
+            'detailQty' => $detailQty,
+        ];
+
+        if (in_groups('admin')) {
+            return view('admin/order_detail', ['data' => $page]);
+        }
+
         if (in_groups('user')) {
-            $orders = $this->orderModel->find($id);
-
-            $arrayKey = ['price', 'image', 'qty'];
-
-            $detailName = explode(',', $orders['product_id']);
-            $detailPrice = explode(',', $orders['items_price']);
-            $detailImage = explode(',', $orders['items_image']);
-            $detailQty = explode(',', $orders['items']);
-
-            // $orderDetail = [];
-            // $values = [$productPrice, $productImage, $productQty];
-            // foreach ($productName as $index => $key) {
-            //     $t = [];
-
-            //     foreach ($values as $value) {
-            //         $t[] = $value[$index];
-            //     }
-
-            //     $orderDetail[$key] = $t;
-            // }
-
-            $page = [
-                'title' => 'Order Detail | Desa Ekspor Indonesia',
-                'orders' => $orders,
-                // 'details' => $orderDetail,
-                'detailName' => $detailName,
-                'detailPrice' => $detailPrice,
-                'detailImage' => $detailImage,
-                'detailQty' => $detailQty,
-            ];
-
             return view('user/order_detail', ['page' => $page]);
         }
     }

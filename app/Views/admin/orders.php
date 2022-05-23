@@ -31,7 +31,7 @@
 							<td><span class="badge bg-dark"><?= $order['trx_id']; ?></span></td>
 							<td><?= $order['email']; ?></td>
 							<td>
-								<?= ($order['total_items'] > 1) ? $order['total_items'] . ' Items' : $order['total_items'] . ' Item' ?>
+								<?= number_format($order['total_items'], 0, ',', '.') . ' Item(s)'; ?>
 							</td>
 							<td>Rp. <?= number_format($order['total_price'], 0, ',', '.'); ?></td>
 							<td><?= $order['order_date']; ?></td>
