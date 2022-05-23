@@ -27,6 +27,18 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
-        <a href="<?= (logged_in()) ? base_url('/dashboard') : base_url('/login'); ?>" class="get-started-btn"><?= (logged_in()) ? 'Dashboard' : 'Login'; ?></a>
+        <?php if (!logged_in()) : ?>
+            <a href="<?= base_url('/login'); ?>" class="get-started-btn">Login</a>
+        <?php endif; ?>
+
+        <?php if (logged_in()) : ?>
+            <?php if (in_groups('admin') || in_groups('mitra')) : ?>
+                <a href="<?= base_url('/dashboard'); ?>" class="get-started-btn">Dashboard</a>
+            <?php endif; ?>
+
+            <?php if (in_groups('user')) : ?>
+                <a href="<?= base_url('/cart'); ?>" class="get-started-btn"><i class="fas fa-shopping-cart"></i> Cart</a>
+            <?php endif; ?>
+        <?php endif; ?>
     </div>
 </header><!-- End Header -->

@@ -43,7 +43,40 @@ class Order extends ResourceController
      */
     public function show($id = null)
     {
-        //
+        if (in_groups('user')) {
+            $orders = $this->orderModel->find($id);
+
+            $arrayKey = ['price', 'image', 'qty'];
+
+            $detailName = explode(',', $orders['product_id']);
+            $detailPrice = explode(',', $orders['items_price']);
+            $detailImage = explode(',', $orders['items_image']);
+            $detailQty = explode(',', $orders['items']);
+
+            // $orderDetail = [];
+            // $values = [$productPrice, $productImage, $productQty];
+            // foreach ($productName as $index => $key) {
+            //     $t = [];
+
+            //     foreach ($values as $value) {
+            //         $t[] = $value[$index];
+            //     }
+
+            //     $orderDetail[$key] = $t;
+            // }
+
+            $page = [
+                'title' => 'Order Detail | Desa Ekspor Indonesia',
+                'orders' => $orders,
+                // 'details' => $orderDetail,
+                'detailName' => $detailName,
+                'detailPrice' => $detailPrice,
+                'detailImage' => $detailImage,
+                'detailQty' => $detailQty,
+            ];
+
+            return view('user/order_detail', ['page' => $page]);
+        }
     }
 
     /**
@@ -72,10 +105,17 @@ class Order extends ResourceController
             'trx_id' => '#ORD' . user()->id . '-' . date('Ymd') . '-' . date('H') . date('i'),
             'product_id' => $data['product_id'],
             'items' => $data['items'],
+            'items_price' => $data['items_price'],
+            'items_image' => $data['items_image'],
             'total_items' => $data['total_items'],
             'total_price' => $data['total_price'],
             'order_date' => date('Y-m-d H:i:s'),
+            'shipping_address' => user()->address,
+            'customer_name' => user()->fullname,
+            'customer_email' => user()->email,
+            'customer_phone' => user()->telp,
         ]);
+
         $this->cartModel->where('user_id', user()->id)->delete();
 
         return redirect()->to(base_url('/orders'));
@@ -139,6 +179,24 @@ class Order extends ResourceController
     public function delete($id = null)
     {
         //
+    }
+
+    public function detail($id)
+    {
+        $orders = $this->orderModel->find($id);
+
+        $productName = explode(',', $orders['product_id']);
+        $productQty = explode(',', $orders['items']);
+
+        $orderDetail = array_combine($productName, $productQty);
+
+        $data = '';
+
+        foreach ($orderDetail as $product => $items) {
+            $data = '<div class="row"><div class="col-4">' . $product . '</div><div class="col-8">: ' . $items . 'Items.</div></div>';
+        }
+
+        echo $data;
     }
 
     public function history()

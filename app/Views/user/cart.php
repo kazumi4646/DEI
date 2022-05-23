@@ -32,15 +32,15 @@
       <?php if (count($page['cart']) > 0) : ?>
         <div id="items">
           <?php foreach ($page['cart'] as $product) : ?>
-            <form action="<?= base_url('/cart'); ?>" method="post" id="add-item">
-              <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+            <form action="<?= base_url('/cart'); ?>" method="post" id="add-form">
+              <input type="hidden" name="product_id" id="add-product-id">
             </form>
 
-            <form action="<?= base_url('/cart/min'); ?>" method="post" id="min-item">
-              <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+            <form action="<?= base_url('/cart/min'); ?>" method="post" id="min-form">
+              <input type="hidden" name="product_id" id="min-product-id">
             </form>
 
-            <form action="<?= base_url('/cart/' . $product['id']); ?>" method="post" id="del-item">
+            <form action="<?= base_url(); ?>/cart/" method="post" id="del-form">
               <input type="hidden" name="_method" value="DELETE">
             </form>
 
@@ -52,13 +52,13 @@
                 <?= $product['name']; ?>
               </div>
               <div class="col-2 col-md-2">
-                <button type="submit" form="min-item" class="btn btn-sm" <?= ($product['items'] == 1) ? 'disabled' : ''; ?>><i class="fas fa-minus"></i></button>
+                <button type="submit" form="min-form" id="btn-min" class="btn btn-sm" <?= ($product['items'] == 1) ? 'disabled' : ''; ?> data-id="<?= $product['id']; ?>"><i class="fas fa-minus"></i></button>
                 <span class="px-2">x <?= $product['items']; ?></span>
-                <button type="submit" form="add-item" class="btn btn-sm"><i class="fas fa-plus"></i></button>
+                <button type="submit" form="add-form" id="btn-add" class="btn btn-sm" data-id="<?= $product['id']; ?>"><i class="fas fa-plus"></i></button>
               </div>
               <div class="col-4 col-md-3">
                 Rp. <?= number_format($product['price'] * $product['items'], 0, ',', '.'); ?>
-                <button type="submit" form="del-item" class="btn" style="color: #e03a3c;"><i class="fas fa-trash-alt"></i></button>
+                <button type="submit" form="del-form" id="btn-del" class="btn" style="color: #e03a3c;" data-id="<?= $product['id']; ?>"><i class="fas fa-trash-alt"></i></button>
               </div>
             </div>
           <?php endforeach; ?>
@@ -96,8 +96,10 @@
         </div>
         <div class="modal-body">
           <form action="<?= base_url('/orders'); ?>" method="post">
-            <input type="hidden" name="product_id" value="<?= implode(',', array_column($page['id'], 'id')); ?>">
+            <input type="hidden" name="product_id" value="<?= implode(',', array_column($page['id'], 'name')); ?>">
             <input type="hidden" name="items" value="<?= implode(',', array_column($page['id'], 'items')); ?>">
+            <input type="hidden" name="items_image" value="<?= implode(',', array_column($page['cart'], 'image')); ?>">
+            <input type="hidden" name="items_price" value="<?= implode(',', array_column($page['cart'], 'price')); ?>">
             <input type="hidden" name="total_items" value="<?= $page['items'][0]['items']; ?>">
             <input type="hidden" name="total_price" value="<?= $page['total'][0]['total']; ?>">
 
@@ -128,6 +130,9 @@
             </div>
 
             <hr>
+            <div class="alert alert-warning" role="alert">
+              You can edit your profile by visiting <a href="<?= base_url('/profile'); ?>" class="text-primary text-decoration-underline">this page</a>.
+            </div>
 
             <div class="row align-items-center">
               <div class="col-3">
@@ -164,5 +169,28 @@
     </div>
   </div>
 <?php endif; ?>
+
+<script>
+  $(document).on('click', '#btn-add', function() {
+    let id = $(this).data('id');
+    let formAction = $('#add-form').attr('action');
+
+    $('#add-product-id').val(id);
+  });
+
+  $(document).on('click', '#btn-min', function() {
+    let id = $(this).data('id');
+    let formAction = $('#min-form').attr('action');
+
+    $('#min-product-id').val(id);
+  });
+
+  $(document).on('click', '#btn-del', function() {
+    let id = $(this).data('id');
+    let formAction = $('#del-form').attr('action');
+
+    $('#del-form').attr('action', formAction + id);
+  });
+</script>
 
 <?= $this->endSection(); ?>

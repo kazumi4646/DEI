@@ -14,7 +14,7 @@ class OrderModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['user_id', 'trx_id', 'product_id', 'items', 'total_items', 'total_price', 'order_date', 'payment_date', 'status', 'shipping_number', 'status_message'];
+    protected $allowedFields    = ['user_id', 'trx_id', 'product_id', 'items', 'items_price', 'items_image', 'total_items', 'total_price', 'order_date', 'payment_date', 'status', 'shipping_address', 'shipping_number', 'customer_name', 'customer_email', 'customer_phone', 'status_message'];
 
     // Dates
     protected $useTimestamps = true;
