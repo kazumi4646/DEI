@@ -29,16 +29,16 @@
 				<tbody>
 					<?php $i = 1; ?>
 					<?php foreach ($data['mitra'] as $mitra) : ?>
-						<tr id="detailModal" data-bs-toggle="modal" data-bs-target="#detail" data-username="<?= $mitra['username']; ?>" data-name="<?= $mitra['name']; ?>" data-no_ktp="<?= $mitra['no_ktp']; ?>" data-no_kk="<?= $mitra['no_kk']; ?>" data-village="<?= $mitra['village']; ?>" data-district="<?= $mitra['district']; ?>" data-city="<?= $mitra['city']; ?>" data-province="<?= $mitra['province']; ?>" data-komoditas="<?= $mitra['komoditas']; ?>" data-populasi="<?= $mitra['populasi']; ?>" data-tahun_tanam="<?= $mitra['tahun_tanam']; ?>" data-luas_lahan="<?= $mitra['luas_lahan']; ?>" data-jumlah_panen="<?= $mitra['jumlah_panen']; ?>" data-pembayaran_koperasi="<?= $mitra['pembayaran_koperasi']; ?>">
+						<tr>
 							<td><?= $i++; ?></td>
 							<td><?= $mitra['username']; ?></td>
 							<td><?= $mitra['name']; ?></td>
 							<td><?= ucwords(strtolower($mitra['village'])) . ', ' . ucwords(strtolower($mitra['district'])) . ', ' . ucwords(strtolower($mitra['city'])) . ', ' . ucwords(strtolower($mitra['province'])); ?></td>
 							<td><?= number_format($mitra['komoditas'], 0, ',', '.'); ?></td>
 							<td><?= number_format($mitra['populasi'], 0, ',', '.'); ?></td>
-							<td><?= number_format($mitra['tahun_tanam'], 0, ',', '.'); ?></td>
-							<td><?= number_format($mitra['luas_lahan'], 0, ',', '.'); ?></td>
-							<td><?= number_format($mitra['jumlah_panen'], 0, ',', '.'); ?></td>
+							<td><?= number_format($mitra['tahun_tanam'], 0, ',', '.'); ?> tahun</td>
+							<td><?= number_format($mitra['luas_lahan'], 0, ',', '.'); ?> m<sup>2</sup></td>
+							<td><?= number_format($mitra['jumlah_panen'], 0, ',', '.'); ?> kg</td>
 							<td>
 								<span class="badge <?= ($mitra['pembayaran_koperasi'] != 'Lunas') ? 'bg-warning text-dark' : 'bg-success'; ?>"><?= $mitra['pembayaran_koperasi']; ?></span>
 							</td>
@@ -48,6 +48,8 @@
 										Lunas
 									</button>
 								<?php endif; ?>
+
+								<button type="button" class="btn btn-sm btn-outline-dark" id="detailModal" data-bs-toggle="modal" data-bs-target="#detail" data-username="<?= $mitra['username']; ?>" data-name="<?= $mitra['name']; ?>" data-no_ktp="<?= $mitra['no_ktp']; ?>" data-no_kk="<?= $mitra['no_kk']; ?>" data-village="<?= $mitra['village']; ?>" data-district="<?= $mitra['district']; ?>" data-city="<?= $mitra['city']; ?>" data-province="<?= $mitra['province']; ?>" data-komoditas="<?= $mitra['komoditas']; ?>" data-populasi="<?= $mitra['populasi']; ?>" data-tahun_tanam="<?= $mitra['tahun_tanam']; ?>" data-luas_lahan="<?= $mitra['luas_lahan']; ?>" data-jumlah_panen="<?= $mitra['jumlah_panen']; ?>" data-pembayaran_koperasi="<?= $mitra['pembayaran_koperasi']; ?>"><i class="fas fa-info-circle"></i> Detail</button>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -135,7 +137,7 @@
 						Komoditas
 					</div>
 					<div class="col-8">
-						: <span id="komoditas"></span>
+						: <span id="komoditas"></span> macam
 					</div>
 				</div>
 				<div class="row mb-2">
@@ -151,7 +153,7 @@
 						Tahun Tanam
 					</div>
 					<div class="col-8">
-						: <span id="tahun_tanam"></span>
+						: <span id="tahun_tanam"></span> tahun
 					</div>
 				</div>
 				<div class="row mb-2">

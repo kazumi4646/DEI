@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 18, 2022 at 06:41 AM
+-- Generation Time: May 23, 2022 at 01:17 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -232,7 +232,43 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (115, '::1', 'admin', NULL, '2022-05-16 02:42:25', 0),
 (116, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-16 02:42:29', 1),
 (117, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-16 21:11:05', 1),
-(118, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-18 01:21:02', 1);
+(118, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-18 01:21:02', 1),
+(119, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-18 21:50:36', 1),
+(120, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-18 22:20:16', 1),
+(121, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-19 00:51:12', 1),
+(122, '::1', 'j=jonathanbasuki', NULL, '2022-05-20 00:10:55', 0),
+(123, '::1', 'jonathanbasuki', NULL, '2022-05-20 00:11:08', 0),
+(124, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-20 00:11:16', 1),
+(125, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-20 00:14:54', 1),
+(126, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-20 00:16:17', 1),
+(127, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-20 04:27:06', 1),
+(128, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-20 04:28:36', 1),
+(129, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-20 21:38:16', 1),
+(130, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-21 02:22:28', 1),
+(131, '::1', 'admin', NULL, '2022-05-21 08:03:43', 0),
+(132, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-21 08:03:57', 1),
+(133, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-22 07:50:24', 1),
+(134, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-22 07:51:52', 1),
+(135, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-22 07:57:16', 1),
+(136, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-22 08:04:40', 1),
+(137, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-22 08:09:53', 1),
+(138, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-22 20:35:18', 1),
+(139, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-23 00:16:44', 1),
+(140, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-23 00:17:53', 1),
+(141, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-23 02:52:01', 1),
+(142, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-23 02:54:41', 1),
+(143, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-23 03:08:10', 1),
+(144, '::1', 'mitra@dei.com', 7, '2022-05-23 04:36:25', 1),
+(145, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-23 04:38:10', 1),
+(146, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-23 04:40:54', 1),
+(147, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-23 04:51:11', 1),
+(148, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-23 07:10:09', 1),
+(149, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-23 07:15:04', 1),
+(150, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-23 07:34:02', 1),
+(151, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-23 07:35:41', 1),
+(152, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-23 08:14:32', 1),
+(153, '::1', 'admin@desaeksporindonesia.com', 1, '2022-05-23 08:15:54', 1),
+(154, '::1', 'basukijonathan4@gmail.com', 11, '2022-05-23 08:16:48', 1);
 
 -- --------------------------------------------------------
 
@@ -7628,22 +7664,30 @@ CREATE TABLE `orders` (
   `trx_id` varchar(255) NOT NULL,
   `product_id` text NOT NULL,
   `items` text NOT NULL,
+  `items_price` text NOT NULL,
+  `items_image` text NOT NULL,
   `total_items` int(11) NOT NULL,
   `total_price` bigint(20) NOT NULL,
   `order_date` datetime NOT NULL,
   `payment_date` datetime DEFAULT NULL,
   `status` enum('Waiting for Payment','Paid','Proceed','Delivered','Success','Canceled') NOT NULL DEFAULT 'Waiting for Payment',
+  `shipping_address` text NOT NULL,
   `shipping_number` text,
-  `status_message` text
+  `customer_name` varchar(255) NOT NULL,
+  `customer_email` varchar(255) NOT NULL,
+  `customer_phone` varchar(15) NOT NULL,
+  `status_message` text,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `trx_id`, `product_id`, `items`, `total_items`, `total_price`, `order_date`, `payment_date`, `status`, `shipping_number`, `status_message`) VALUES
-(6, 11, '#ORD11-20220513-1542', '18', '5', 5, 9500000, '2022-05-13 15:42:05', '2022-05-16 16:49:06', 'Delivered', '#SHP11-20220518-1335', NULL),
-(7, 11, '#ORD11-20220513-1548', '18', '1', 1, 1900000, '2022-05-13 15:48:07', '2022-05-16 16:29:43', 'Success', NULL, NULL);
+INSERT INTO `orders` (`id`, `user_id`, `trx_id`, `product_id`, `items`, `items_price`, `items_image`, `total_items`, `total_price`, `order_date`, `payment_date`, `status`, `shipping_address`, `shipping_number`, `customer_name`, `customer_email`, `customer_phone`, `status_message`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(17, 11, '#ORD11-20220523-1259', 'Leather Wallet Original Crocodile,HP', '2,1', '1900000,2499000', '1653283055_de321e0a3b3d8b4f1d6d.jpg,1653283018_1e5591960e2cb148371e.jpg', 3, 6299000, '2022-05-23 12:59:22', '2022-05-23 20:16:23', 'Success', 'Kembangan, Jakarta Barat', '#SHP11-20220523-1452', 'Jonathan Christoper Basuki', 'basukijonathan4@gmail.com', '081234567890', NULL, '2022-05-23 12:59:22', '2022-05-23 16:35:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -7670,8 +7714,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `unit_price`, `description`, `image`, `status`, `request`, `reason`, `shop`, `seller_id`) VALUES
-(12, 'asfvu', 1830120, '', '13kahsvfa', '1644508644_09bf544afa90dbfa1623.png', 'In Stock', 'Not Requested', 'jelek cokk, ga bakal laku blokkkkk', 'Not Shown', 7),
-(18, 'Leather Wallet Original Crocodile', 1900000, '', 'a;shfpaisf', '1645420095_ea7f96a0fe4dfde2c587.jpg', 'In Stock', 'Approved', NULL, 'Showed', 1);
+(12, 'Dompet', 51000, 'item', 'kulit asli', '1653298619_afd0bd12615112f56e30.jpg', 'In Stock', 'Requested', 'jelek cokk, ga bakal laku blokkkkk', 'Not Shown', 7),
+(18, 'Leather Wallet Original Crocodile', 998000, 'item', 'kulit buaya asli', '1653283055_de321e0a3b3d8b4f1d6d.jpg', 'In Stock', 'Approved', NULL, 'Showed', 1),
+(19, 'Iphone 12 Pro Max', 13499000, 'item', 'HP Iphone baru 2020', '1653283018_1e5591960e2cb148371e.jpg', 'In Stock', 'Approved', NULL, 'Showed', 1),
+(23, 'Mouse', 299000, 'item', 'dpi bisa diatur sesuka\r\nbisa rgb\r\npakai kabel', '1653296254_f5a898707eaf42860d25.jpg', 'In Stock', 'Approved', NULL, 'Showed', 1);
 
 -- --------------------------------------------------------
 
@@ -8291,7 +8337,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `username`, `fullname`, `birth`, `address`, `telp`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'admin@desaeksporindonesia.com', 'admin', 'Administrator', NULL, NULL, NULL, '$2y$10$oyUreYo9unzka5E4jyADbOvp7sY/ZJMHRe6sZHKFsN/D7PN1TGqFy', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2022-02-02 02:35:17', NULL, NULL),
 (7, 'mitra@dei.com', 'mitra', 'Mitra DEI', '2022-03-13', 'Kuta', NULL, '$2y$10$aOprIm8P/Ev.45ylGiHS0.hALlFPD.J3ICjHVyYDtJBLNe6OJfeFW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2022-02-07 21:12:25', '2022-05-10 20:55:20', NULL),
-(11, 'basukijonathan4@gmail.com', 'jonathanbasuki', 'Jonathan Christoper Basuki', '2004-04-04', 'Kembangan, Jakarta', '081234567890', '$2y$10$Pip.4drYBEsr5FXR6OPaNOKv3kU7Jb3IH581aLfXeFp/T.XjzC73S', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2022-03-02 00:13:31', '2022-05-10 04:01:30', NULL);
+(11, 'basukijonathan4@gmail.com', 'jonathanbasuki', 'Jonathan Christoper Basuki', '2004-04-04', 'Kembangan, Jakarta Barat', '081234567890', '$2y$10$Pip.4drYBEsr5FXR6OPaNOKv3kU7Jb3IH581aLfXeFp/T.XjzC73S', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2022-03-02 00:13:31', '2022-05-22 08:10:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -91987,7 +92033,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -92011,7 +92057,7 @@ ALTER TABLE `auth_tokens`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -92029,13 +92075,13 @@ ALTER TABLE `mitra`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
