@@ -43,7 +43,7 @@ class CartModel extends Model
     public function getCartProduct($user_id)
     {
         $builder = $this->db->table('carts');
-        $builder->select('products.id, products.image, products.name, products.price, carts.items');
+        $builder->select('products.id, products.image, products.name, products.price, products.unit_price, carts.items');
         $builder->join('products', 'products.id = carts.product_id');
         $builder->join('users', 'users.id = carts.user_id');
         $builder->where('carts.user_id', $user_id);
