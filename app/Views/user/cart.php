@@ -19,64 +19,121 @@
   <section class="inner-page">
     <div class="container" data-aos="fade-up">
       <?php if (count($page['cart']) == 0) : ?>
-        <div class="alert alert-secondary mb-0" role="alert">
-          <p>
-            <i class="fas fa-shopping-cart fs-4"></i> <span class="fs-6">Your cart is currently empty!</span>
-          </p>
-          <div class="shop-btn">
-            <a href="<?= base_url('/shop'); ?>" class="btn get-started-btn" style="margin-left: 0 !important;">Start Shopping</a>
+        <div class="portfolio-details py-0" id="portfolio-details">
+          <div class="col-12">
+            <div class="portfolio-info">
+              <div class="empty-message d-flex justify-content-center">
+                <p class="fs-5 fw-bold">Your cart is currently empty!</p>
+              </div>
+              <div class="shop-btn d-flex justify-content-center">
+                <a href="<?= base_url('/shop'); ?>" class="btn get-started-btn" style="margin-left: 0 !important;">Start Shopping</a>
+              </div>
+            </div>
           </div>
         </div>
       <?php endif; ?>
 
       <?php if (count($page['cart']) > 0) : ?>
-        <div id="items">
-          <?php foreach ($page['cart'] as $product) : ?>
-            <form action="<?= base_url('/cart'); ?>" method="post" id="add-form">
-              <input type="hidden" name="product_id" id="add-product-id">
-            </form>
+        <form action="<?= base_url('/cart'); ?>" method="post" id="add-form">
+          <input type="hidden" name="product_id" id="add-product-id">
+        </form>
 
-            <form action="<?= base_url('/cart/min'); ?>" method="post" id="min-form">
-              <input type="hidden" name="product_id" id="min-product-id">
-            </form>
+        <form action="<?= base_url('/cart/min'); ?>" method="post" id="min-form">
+          <input type="hidden" name="product_id" id="min-product-id">
+        </form>
 
-            <form action="<?= base_url(); ?>/cart/" method="post" id="del-form">
-              <input type="hidden" name="_method" value="DELETE">
-            </form>
+        <form action="<?= base_url(); ?>/cart/" method="post" id="del-form">
+          <input type="hidden" name="_method" value="DELETE">
+        </form>
 
-            <div class="row align-items-center fs-6 mt-3">
-              <div class="col-3 col-md-2 offset-md-1 ">
-                <img src="<?= base_url('/uploads/products/' . $product['image']); ?>" alt="<?= $product['name']; ?>" style="max-width: 100%;">
+        <div class="d-none d-md-block">
+          <div id="items">
+            <?php foreach ($page['cart'] as $product) : ?>
+              <div class="row align-items-center fs-6 mt-3">
+                <div class="col-3 col-md-2 offset-md-1 ">
+                  <img src="<?= base_url('/uploads/products/' . $product['image']); ?>" alt="<?= $product['name']; ?>" style="max-width: 100%;">
+                </div>
+                <div class="col-3 col-md-3">
+                  <?= $product['name']; ?>
+                </div>
+                <div class="col-2 col-md-2">
+                  <button type="submit" form="min-form" id="btn-min" class="btn btn-sm" <?= ($product['items'] == 1) ? 'disabled' : ''; ?> data-id="<?= $product['id']; ?>"><i class="fas fa-minus"></i></button>
+                  <span class="px-2">x <?= $product['items']; ?></span>
+                  <button type="submit" form="add-form" id="btn-add" class="btn btn-sm" data-id="<?= $product['id']; ?>"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="col-4 col-md-3">
+                  Rp. <?= number_format($product['price'] * $product['items'], 0, ',', '.'); ?>
+                  <button type="submit" form="del-form" id="btn-del" class="btn" style="color: #e03a3c;" data-id="<?= $product['id']; ?>"><i class="fas fa-trash-alt"></i></button>
+                </div>
               </div>
-              <div class="col-3 col-md-3">
-                <?= $product['name']; ?>
-              </div>
-              <div class="col-2 col-md-2">
-                <button type="submit" form="min-form" id="btn-min" class="btn btn-sm" <?= ($product['items'] == 1) ? 'disabled' : ''; ?> data-id="<?= $product['id']; ?>"><i class="fas fa-minus"></i></button>
-                <span class="px-2">x <?= $product['items']; ?></span>
-                <button type="submit" form="add-form" id="btn-add" class="btn btn-sm" data-id="<?= $product['id']; ?>"><i class="fas fa-plus"></i></button>
-              </div>
-              <div class="col-4 col-md-3">
-                Rp. <?= number_format($product['price'] * $product['items'], 0, ',', '.'); ?>
-                <button type="submit" form="del-form" id="btn-del" class="btn" style="color: #e03a3c;" data-id="<?= $product['id']; ?>"><i class="fas fa-trash-alt"></i></button>
+            <?php endforeach; ?>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-5 offset-3 col-md-2 offset-md-6">
+              <b>Total Price</b>
+            </div>
+            <div class="col-4 col-md-2 offset-md-0">
+              <b>Rp. <?= number_format($page['total'][0]['total'], 0, ',', '.'); ?></b>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3 offset-8 col-md-2 offset-md-8">
+              <button type="button" class="btn get-started-btn" style="margin: 20px 0 !important;" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-block d-md-none">
+          <div class="row portfolio-details py-0" id="portfolio-details">
+            <div class="col-12">
+              <div class="portfolio-info">
+                <?php foreach ($page['cart'] as $product) : ?>
+                  <div class="row mb-3">
+                    <div class="col-5">
+                      <img src="<?= base_url('/uploads/products/' . $product['image']); ?>" alt="<?= $product['name']; ?>" class="w-100">
+                    </div>
+                    <div class="col-7">
+                      <p class="mb-2 fs-6 fw-bold"><?= $product['name']; ?></p>
+                      <div class="cart-btn">
+                        <button type="submit" form="min-form" id="btn-min" class="btn btn-sm" <?= ($product['items'] == 1) ? 'disabled' : ''; ?> data-id="<?= $product['id']; ?>"><i class="fas fa-minus"></i></button>
+                        <span class="px-1">x <?= $product['items']; ?></span>
+                        <button type="submit" form="add-form" id="btn-add" class="btn btn-sm" data-id="<?= $product['id']; ?>"><i class="fas fa-plus"></i></button>
+                        <button type="submit" form="del-form" id="btn-del" class="btn" style="color: #e03a3c;" data-id="<?= $product['id']; ?>"><i class="fas fa-trash-alt"></i></button>
+                      </div>
+                      <span>
+                        <?= 'Rp. ' . number_format($product['price'] * $product['items'], 0, ',', '.'); ?>
+                      </span>
+                    </div>
+                  </div>
+                <?php endforeach; ?>
+
+                <div class="row">
+                  <div class="col-7 offset-5">
+                    <hr>
+                  </div>
+                </div>
+
+                <div class="row fw-bold">
+                  <div class="col-5">
+                    <p>Total Price</p>
+                  </div>
+                  <div class="col-7">
+                    <span>
+                      <?= 'Rp. ' . number_format($page['total'][0]['total'], 0, ',', '.'); ?>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <button type="button" class="btn get-started-btn" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+                    Checkout
+                  </button>
+                </div>
               </div>
             </div>
-          <?php endforeach; ?>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-5 offset-3 col-md-2 offset-md-6">
-            <b>Total Price</b>
-          </div>
-          <div class="col-4 col-md-2 offset-md-0">
-            <b>Rp. <?= number_format($page['total'][0]['total'], 0, ',', '.'); ?></b>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3 offset-8 col-md-2 offset-md-8">
-            <button type="button" class="btn get-started-btn" style="margin: 20px 0 !important;" data-bs-toggle="modal" data-bs-target="#checkoutModal">
-              Checkout
-            </button>
           </div>
         </div>
       <?php endif; ?>
