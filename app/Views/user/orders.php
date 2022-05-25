@@ -19,7 +19,7 @@
 
 	<section class="inner-page">
 		<div class="container">
-			<table class="table" id="datatables" style="width: 100%;">
+			<table class="table w-100" id="datatables">
 				<thead>
 					<tr>
 						<th>Transaction ID</th>
